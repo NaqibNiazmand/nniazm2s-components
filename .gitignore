@@ -1,0 +1,7 @@
+.idea/
+.DS_Store
+dump.rdb
+node_modules
+jsdoc_config.json
+package-lock.json
+*.xcf
