@@ -154,15 +154,3 @@ export function registieren(app, events) {
     </div>
     `;
 }
-
-
-/**
- * HTML template for Registerform
- * @returns {TemplateResult}
- */
-export function menuComp(app, events) {
-    return html`
-    <script src="https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-3.0.2.js"></script>
-    <ccm-menu-3-0-2 key='["ccm.get","https://ccmjs.github.io/akless-components/menu/resources/configs.js","top_tabs"]'></ccm-menu-3-0-2>
-    `;
-}
