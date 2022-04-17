@@ -78,14 +78,11 @@
                  * @type {Function}
                  */
                 register_button: async () => {
-                    /* document.body.innerHTML = ''
+                    document.body.innerHTML = ''
                      var divEle = document.createElement('div');
                      divEle.setAttribute('id', 'divForRegistration')
                      this.html.render(this.html.registieren(this, events), divEle);
-                     document.body.appendChild(divEle) */
-
-                    this.html.render(this.html.menuComp(this, events), document.body);
-                    console.log("Test ")
+                     document.body.appendChild(divEle)
                 },
 
                 /**
