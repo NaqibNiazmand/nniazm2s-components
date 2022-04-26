@@ -12,6 +12,10 @@ export { render };
  */
 export function mainContent(app) {
     return html`
+        <header>
+            <section></section>
+            <section class="d-flex align-items-center"> </section>
+        </header>
         <main>
             <div>
         

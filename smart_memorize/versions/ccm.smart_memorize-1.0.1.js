@@ -26,16 +26,18 @@
             ],
             "hash": [ "ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs" ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
-            "html": ["ccm.load","../sub-components/home/resources/templates_home.mjs"],
+            "html": ["ccm.load","./../smart_memorize/resources/templates.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
-                    "de": ["ccm.load", "./resources/resources.mjs#de"],
-                    "en": ["ccm.load", "./resources/resources.mjs#en"],
+                    "de": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
+                    "en": ["ccm.load", "./../smart_memorize/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./resources/resources.mjs#de"],
+            "text": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
             "home" : ["ccm.component", "./../sub-components/home/ccm.home-1.0.0.js"],
+            // "header_without_reg_btn" : ["ccm.start", "./../sub-components/header/ccm.header_without_reg_btn-1.0.0.js"],
+            "header_reg_btn" : ["ccm.start", "./../sub-components/header/ccm.header_reg_btn-1.0.0.js"],
             "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js", {
                 "data": {
                     "entries": [
@@ -181,25 +183,25 @@
              * @type {Function}
              */
             const render_home = async () => {
-                // this.html.render(this.html.main(this, events), this.element);
-                // this.lang.translate();
-                // // render user login/logout button
-                // const user = await this.user.component.instance({
-                //     realm: 'guest',
-                //     hash: ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
-                //     url: 'https://ccm2.inf.h-brs.de',
-                //     store: 'nniazm2s_users_store',
-                //     onchange: event => event ? render_logged_in() : render_logged_out(),
-                // });
-                // await user.start();
-                // // render user login/logout button
-                // user && $.append(this.element.querySelector('header'), user.root);
-                // // render language selection
-                // this.lang && $.append(this.element.querySelector('header'), this.lang.root);
+                this.html.render(this.html.main(), this.element);
+                this.lang.translate();
+                // render user login/logout button
+                const user = await this.user.component.instance({
+                    realm: 'guest',
+                    hash: ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
+                    url: 'https://ccm2.inf.h-brs.de',
+                    store: 'nniazm2s_users_store',
+                    onchange: event => event ? render_logged_in() : render_logged_out(),
+                });
+                await user.start();
                 this.home.start()
-
-                console.log(this.home)
                 this.home && this.home.start( { root: this.element.querySelector('main') } );
+
+                // render user login/logout button
+                user && $.append(this.element.querySelector('header section:last-child'), user.root);
+                // render language selection
+                this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
+
             }
 
             /**
@@ -207,12 +209,8 @@
              * @type {Function}
              */
             const render_logged_out = () => {
-
-
-
-               render_home()
-                // this.home.start()
-                // this.home && this.home.start( { root: this.element.querySelector('main') } );
+                this.home.start()
+                this.home && this.home.start( { root: this.element.querySelector('main') } );
             }
 
             /**

@@ -1,3 +1,4 @@
+
 /**
  * @overview example for a simple ccmjs-based web component that just renders "Hello, World!"
  * @author André Kless <andre.kless@web.de> 2017-2018, 2021
@@ -5,20 +6,29 @@
  */
 (() => {
     const component = {
-        name: 'home',
+        name: 'header_reg_btn',
         version: [1, 0, 0],
         ccm: 'https://ccmjs.github.io/ccm/ccm.js',
         config: {
+            "css": ["ccm.load",
+                [  // serial
+                    "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+                    "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-dark.min.css",
+                    "./../sub-components/header/resources/styles.css"
+                ],
+                "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
+                { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
+            ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "template": ["ccm.load", "./../sub-components/home/resources/templates_home.mjs"],
+            "html": ["ccm.load", "./../sub-components/header/resources/templates_header.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
-                    "de": ["ccm.load", "./../sub-components/home/resources/resources.mjs#de"],
-                    "en": ["ccm.load", "./../sub-components/home/resources/resources.mjs#en"],
+                    "de": ["ccm.load", "./../sub-components/header/resources/resources.mjs#de"],
+                    "en": ["ccm.load", "./../sub-components/header/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./../sub-components/home/resources/resources.mjs#de"],
-            "header_reg_btn" : ["ccm.start", "./../sub-components/header/ccm.header_reg_btn-1.0.0.js"],
+            "text": ["ccm.load", "./../sub-components/header/resources/resources.mjs#de"],
+            "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
         },
         Instance: function () {
             /**
@@ -38,12 +48,29 @@
             };
 
             /**
+             * contains all event handlers
+             * @type {Object.<string,Function>}
+             */
+            const events = {
+                /**
+                 * register button control
+                 * @type {Function}
+                 */
+                register_button: async () => {
+                    document.body.innerHTML = ''
+                    const divEle = document.createElement('div');
+                    divEle.setAttribute('id', 'divForRegistration')
+                    this.html.render(this.html.registieren(this, events), divEle);
+                    document.body.appendChild(divEle)
+                },
+            }
+
+            /**
              * renders/updates app content in webpage area
              * @type {Function}
              */
-            const render = () => {
-                this.template.render(this.template.mainContent(this), this.element);
-                this.header_reg_btn && $.append(this.element.querySelector('header section:last-child'), this.header_reg_btn.root);
+            const render = async () => {
+                this.html.render(this.html.headerout(this, events), this.element);
             }
 
             this.start = async () => {
