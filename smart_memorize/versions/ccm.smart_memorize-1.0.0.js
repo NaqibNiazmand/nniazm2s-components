@@ -26,7 +26,7 @@
             ],
             "md5": ["ccm.load", "http://www.myersdaily.org/joseph/javascript/md5.js"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "html": ["ccm.load", "./resources/templates.mjs"],
+            "html": ["ccm.load", "./resources/templates_home.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
                     "de": ["ccm.load", "./resources/resources.mjs#de"],

@@ -26,7 +26,7 @@
             ],
             "hash": [ "ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs" ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
-            "html": ["ccm.load", "./resources/templates.mjs"],
+            "html": ["ccm.load","../sub-components/home/resources/templates_home.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     "de": ["ccm.load", "./resources/resources.mjs#de"],
@@ -34,14 +34,8 @@
                 }
             }],
             "text": ["ccm.load", "./resources/resources.mjs#de"],
-            "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js",
-                {
-                    realm: 'cloud',
-                    hash: [ "ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs" ],
-                    url: 'https://ccm2.inf.h-brs.de',
-                    store: 'nniazm2s_users_store',
-                    onchange: event => event ? render_logged_in() : render_logged_out(),
-                }],
+            "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
+            "home" : ["ccm.component", "./../sub-components/home/ccm.home-1.0.0.js"],
             "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js", {
                 "data": {
                     "entries": [
@@ -186,13 +180,39 @@
              * renders/updates app content in webpage area is logged out
              * @type {Function}
              */
+            const render_home = async () => {
+                // this.html.render(this.html.main(this, events), this.element);
+                // this.lang.translate();
+                // // render user login/logout button
+                // const user = await this.user.component.instance({
+                //     realm: 'guest',
+                //     hash: ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
+                //     url: 'https://ccm2.inf.h-brs.de',
+                //     store: 'nniazm2s_users_store',
+                //     onchange: event => event ? render_logged_in() : render_logged_out(),
+                // });
+                // await user.start();
+                // // render user login/logout button
+                // user && $.append(this.element.querySelector('header'), user.root);
+                // // render language selection
+                // this.lang && $.append(this.element.querySelector('header'), this.lang.root);
+                this.home.start()
+
+                console.log(this.home)
+                this.home && this.home.start( { root: this.element.querySelector('main') } );
+            }
+
+            /**
+             * renders/updates app content in webpage area is logged out
+             * @type {Function}
+             */
             const render_logged_out = () => {
-                this.html.render(this.html.main(this, events), this.element);
-                this.lang.translate();
-                // render user login/logout button
-                this.user && $.append(this.element.querySelector('header section:last-child'), this.user.root);
-                // render language selection
-                this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
+
+
+
+               render_home()
+                // this.home.start()
+                // this.home && this.home.start( { root: this.element.querySelector('main') } );
             }
 
             /**
@@ -200,14 +220,13 @@
              * @type {Function}
              */
             const render_logged_in = () => {
-                render_logged_out()
-                // render menu
+                console.log('render_logged_in called')
                 this.menu && this.menu.start( { root: this.element.querySelector('main') } );
             }
 
             this.start = async () => {
                 // render_logged_out content
-                render_logged_out();
+                render_home();
             };
 
         }

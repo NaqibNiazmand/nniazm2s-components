@@ -15,7 +15,6 @@ export { render };
 export function main(app, events) {
     return html`
         ${header(app, events)}
-        ${mainContent(app)}
         ${footer()}
     `;
 }
@@ -35,6 +34,8 @@ export function header(app, events) {
                 <section class="d-flex align-items-center">
                 </section>
             </header>
+            <main>
+            </main>
         `;
     } else {
         return html`
@@ -48,31 +49,12 @@ export function header(app, events) {
                         data-lang="btn_register">${app.text.btn_register}</button>
                 </section>
             </header>
+            <main>
+            </main>
         `;
     }
 
     app.start()
-}
-
-export function mainContent(app) {
-    return html`
-        <main>
-            <div>
-        
-                <body>
-                    <p data-lang="welcome_text">${app.text.welcome_text}</p>
-                    <p data-lang="options_text">${app.text.options_text}</p>
-                    <ul>
-                        <li data-lang="create_free_user_profile">${app.text.create_free_user_profile}</li>
-                        <li data-lang="create_flashcards">${app.text.create_flashcards}</li>
-                        <li data-lang="select_flashcard_pool">${app.text.select_flashcard_pool}</li>
-                        <li data-lang="sort_flashcard_by_name_and_topic">${app.text.sort_flashcard_by_name_and_topic}</li>
-                        <li data-lang="create_individual_training_pool">${app.text.create_individual_training_pool}</li>
-                    </ul>
-                </body>
-            </div>
-        </main>
-    `;
 }
 
 /**
@@ -154,3 +136,4 @@ export function registieren(app, events) {
     </div>
     `;
 }
+
