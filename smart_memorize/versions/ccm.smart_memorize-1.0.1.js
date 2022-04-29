@@ -90,16 +90,10 @@
                     onchange: event => event ? render_logged_in() : render_logged_out(),
                     title: 'Please enter username and Password',
                 });
-                // await user.start();
-                // this.register_reg_btn && $.append(this.element.querySelector('main'), this.register_reg_btn.root);
                 this.home && $.append(this.element.querySelector('main'), this.home.root);
-                // this.home && this.home.start( { root: this.element.querySelector('main') } );
-                // render user login/logout button
-                // user && $.append(this.element.querySelector('header section:last-child'), user.root);
-                this.lang.translate();
                 // render language selection
+                this.lang.translate();
                 this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
-
             }
 
             /**
@@ -115,17 +109,12 @@
              * @type {Function}
              */
             const render_logged_in = () => {
-                console.log('render_logged_in called')
                 this.menu && this.menu.start( { root: this.element.querySelector('main') } );
             }
 
             this.start = async () => {
                 // render_logged_out content
                 render_home();
-                var shadow = this.shadow
-                console.log(shadow)
-                var home = shadow.supportedMethods
-                console.log(home)
             };
 
         }

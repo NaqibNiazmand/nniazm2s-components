@@ -165,7 +165,6 @@
              * @type {Function}
              */
             const render = (app) => {
-                console.log("app render", app)
                 this.html.render(this.html.main_V_1_0_0(app), this.element);
                 this.lang.translate();
             }
@@ -177,6 +176,7 @@
                 this.user && $.append(this.element.querySelector('header section:last-child'), this.user.root);
                 // render language selection
                 this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
+                // render register button
                 this.register_reg_btn && $.append(this.element.querySelector('#user_registration'), this.register_reg_btn.root);
             };
 
