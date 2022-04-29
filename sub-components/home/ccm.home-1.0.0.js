@@ -18,7 +18,8 @@
                 }
             }],
             "text": ["ccm.load", "./../sub-components/home/resources/resources.mjs#de"],
-            "header_reg_btn" : ["ccm.start", "./../sub-components/header/ccm.header_reg_btn-1.0.0.js"],
+            "register_reg_btn" : ["ccm.component", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
+
         },
         Instance: function () {
             /**
@@ -43,11 +44,12 @@
              */
             const render = () => {
                 this.template.render(this.template.mainContent(this), this.element);
-                this.header_reg_btn && $.append(this.element.querySelector('header section:last-child'), this.header_reg_btn.root);
             }
 
             this.start = async () => {
                 render()
+                this.register_reg_btn && this.register_reg_btn.start( { root: this.element.querySelector('#user_registration') } );
+
             };
         }
     };

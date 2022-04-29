@@ -1,29 +1,7 @@
 import {html, render} from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
-
 export {render};
-
 /**
- * HTML template for header
- * @returns {TemplateResult}
- */
-export function headerIn() {
-
-    return html`
-        <header>
-            <section>
-                <!-- logo -->
-                <img src="./resources/Logo.PNG" alt="Logo Picture" height="100px" width="200px"></img>
-            </section>
-            <section class="d-flex align-items-center">
-            </section>
-        </header>
-        <main>
-        </main>
-    `;
-}
-
-/**
- * HTML template for header
+ * HTML template for register
  * @returns {TemplateResult}
  */
 export function headerout(app, events) {
@@ -35,7 +13,7 @@ export function headerout(app, events) {
                     border: none;
                     color: white;
                     padding: 16px 32px;
-                    text-align: right;
+                    text-align: center;
                     text-decoration: none;
                     display: inline-block;
                     font-size: 16px;
@@ -56,6 +34,7 @@ export function headerout(app, events) {
                 }
             </style>
             <section class="d-flex align-items-center">
+                <div id="id_for_reg_btn" ></div>
             </section>
             <section class="d-flex align-items-center">
                 <button type="button" class="button button1" @click=${events.register_button}

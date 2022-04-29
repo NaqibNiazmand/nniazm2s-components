@@ -25,6 +25,9 @@ export const de = {
     "repeat_password" : "Passwort wiederholen",
     "show_password" : "Passwort anzeigen",
     "confirm_button_text" : "Bestätigen",
+    "smart_memorize_services_user_profil" : "Um die Möglichkeiten des Smart Memorize nutzen zu können, benötigen sie einen Kostenlosen Benutzerprofil.",
+    "user_registration_click" : "Zur Registrierung klicken sie auf den Registierungsbutton:",
+
 };
 
 /**
@@ -48,6 +51,9 @@ export const en = {
     "repeat_password" : "Repeat Password",
     "show_password" : "Show Password",
     "confirm_button_text" : "Confirm",
+    "smart_memorize_services_user_profil" : "To be able to use the features of Smart Memorize, you need a free user profile.",
+    "user_registration_click" : "Click on the registration button to register:",
+
 };
 
 /**

@@ -5,7 +5,6 @@
  * @changes
  * version 1.0.0 Registration and login components implemented
  * */
-
 (() => {
     const component = {
         name: 'smart_memorize',
@@ -26,14 +25,14 @@
             ],
             "md5": ["ccm.load", "http://www.myersdaily.org/joseph/javascript/md5.js"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "html": ["ccm.load", "./resources/templates_home.mjs"],
+            "html": ["ccm.load", "./../smart_memorize/resources/templates.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
-                    "de": ["ccm.load", "./resources/resources.mjs#de"],
-                    "en": ["ccm.load", "./resources/resources.mjs#en"],
+                    "de": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
+                    "en": ["ccm.load", "./../smart_memorize/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./resources/resources.mjs#de"],
+            "text": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js",
                 {
                     realm: 'cloud',
@@ -42,6 +41,7 @@
                     store: 'nniazm2s_users_store'
                 }],
             "menu": ["ccm.load", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js#bootstrap",],
+            "register_reg_btn" : ["ccm.start", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
         },
         Instance: function () {
             /**
@@ -164,19 +164,20 @@
              * renders/updates app content in webpage area
              * @type {Function}
              */
-            const render = () => {
-                this.html.render(this.html.main(this, events), this.element);
+            const render = (app) => {
+                console.log("app render", app)
+                this.html.render(this.html.main_V_1_0_0(app), this.element);
                 this.lang.translate();
             }
 
             this.start = async () => {
                 // render content
-                render();
+                render(this);
                 // render user login/logout button
                 this.user && $.append(this.element.querySelector('header section:last-child'), this.user.root);
                 // render language selection
                 this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
-
+                this.register_reg_btn && $.append(this.element.querySelector('#user_registration'), this.register_reg_btn.root);
             };
 
         }
