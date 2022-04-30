@@ -37,24 +37,7 @@
             "user": [ 'ccm.component', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js' ],
             "home" : ["ccm.start", "./../sub-components/home/ccm.home-1.0.0.js"],
             "register_reg_btn" : ["ccm.start", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
-            "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js", {
-                "data": {
-                    "entries": [
-                        {
-                            "title": "Menu Item A",
-                            "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-8.0.2.js" ]
-                        },
-                        {
-                            "title": "Menu Item B",
-                            "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/image_map/versions/ccm.image_map-4.0.0.js", ["ccm.load","https://ccmjs.github.io/akless-components/image_map/resources/resources.mjs#demo"] ]
-                        },
-                        {
-                            "title": "Menu Item C",
-                            "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
-                        }
-                    ]
-                }
-            }],
+            "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js"],
         },
         Instance: function () {
             /**
@@ -90,7 +73,11 @@
                     onchange: event => event ? render_logged_in() : render_logged_out(),
                     title: 'Please enter username and Password',
                 });
-                this.home && $.append(this.element.querySelector('main'), this.home.root);
+                if(!user.isLoggedIn()){
+                    this.home && $.append(this.element.querySelector('main'), this.home.root);
+                }else {
+                    render_logged_in()
+                }
                 // render language selection
                 this.lang.translate();
                 this.lang && $.append(this.element.querySelector('header section:last-child'), this.lang.root);
@@ -109,7 +96,33 @@
              * @type {Function}
              */
             const render_logged_in = () => {
-                this.menu && this.menu.start( { root: this.element.querySelector('main') } );
+                var title_crate_flashcards = this.lang.getValue() === "de" ? "Lernkarten erstellen" : "Create flashcards";
+                var title_generate_flashcards = this.lang.getValue() === "de" ? "Lernkarten generieren" : "Generate flashcards";
+                var title_show_flashcards = this.lang.getValue() === "de" ? "Lernkarten anzeigen" : "Show flashcards";
+                var title_start_training_pool = this.lang.getValue() === "de" ? "Trainingspool starten" : "Start training pool";
+                this.menu && this.menu.start({
+                    root: this.element.querySelector('main'),
+                    "data": {
+                        "entries": [
+                            {
+                                "title": title_crate_flashcards,
+                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-8.0.2.js" ]
+                            },
+                            {
+                                "title": title_generate_flashcards,
+                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/image_map/versions/ccm.image_map-4.0.0.js", ["ccm.load","https://ccmjs.github.io/akless-components/image_map/resources/resources.mjs#demo"] ]
+                            },
+                            {
+                                "title": title_show_flashcards,
+                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
+                            },
+                            {
+                                "title": title_start_training_pool,
+                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
+                            }
+                        ]
+                    },
+                });
             }
 
             this.start = async () => {
