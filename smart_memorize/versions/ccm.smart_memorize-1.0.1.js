@@ -106,7 +106,7 @@
                         "entries": [
                             {
                                 "title": title_crate_flashcards,
-                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-8.0.2.js" ]
+                                "content": [ "ccm.proxy", "./../sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js" ]
                             },
                             {
                                 "title": title_generate_flashcards,
