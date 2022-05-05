@@ -1,6 +1,6 @@
 /**
- * @overview example for a simple ccmjs-based web component that just renders "Hello, World!"
- * @author André Kless <andre.kless@web.de> 2017-2018, 2021
+ * @overview A new sub component. For the rendering of the start or home page
+ * @author Naqib Niazmand <naqib.niazmand@smail.inf.h-brs.de>
  * @license The MIT License (MIT)
  */
 (() => {

@@ -1,6 +1,6 @@
 /**
- * @overview example for a simple ccmjs-based web component that just renders "Hello, World!"
- * @author André Kless <andre.kless@web.de> 2017-2018, 2021
+ * @overview A new sub component. For the registration of new users
+ * @author Naqib Niazmand <naqib.niazmand@smail.inf.h-brs.de>
  * @license The MIT License (MIT)
  */
 (() => {
@@ -56,7 +56,6 @@
              * @type {Object.<string,Function>}
              */
             const events = {
-
                 /**
                  * register button control
                  * @type {Function}
@@ -68,7 +67,6 @@
                     this.html.render(this.html.registieren(this, events), divEle);
                     document.body.appendChild(divEle)
                 },
-
                 /**
                  * register confirm button control
                  * @type {Function}
@@ -87,19 +85,11 @@
                         alert(resultMsg)
                     } else if (password === confirm_password && (password !== null || password !== '' || confirm_password !== '' || confirm_password !== null)) {
                         create_user(username, md5Password);
-                        // document.body.innerHTML = ''
-                        // const divEle = document.createElement('div');
-                        // divEle.setAttribute('id', 'divForRegistration2')
-                        // this.html.render(this.html.registieren(this, events), divEle);
-                        // document.body.appendChild(divEle)
-                        // this.ccm.start(this.component, {root: divEle});
-
                     } else {
                         resultMsg = this.lang.getValue() === "de" ? "Passwörter stimmen nicht überein. Bitte versuchen Sie es noch einmal!" : "Passwords do not match. Please try again!";
                         alert(resultMsg)
                     }
                 },
-
                 /**
                  * register confirm button control
                  * @type {Function}
@@ -116,7 +106,6 @@
                     }
                 },
             }
-
             /**
              * create user in https://ccm2.inf.h-brs.de with name nniazm2s_users_store
              * @type {Function}
@@ -155,7 +144,6 @@
             const render = async () => {
                 this.html.render(this.html.headerout(this, events), this.element);
             }
-
             this.start = async () => {
                 render()
             };
