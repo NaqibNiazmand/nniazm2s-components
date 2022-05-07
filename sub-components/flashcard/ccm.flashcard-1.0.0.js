@@ -10,21 +10,21 @@
         ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js',
         config: {
             "css": ["ccm.load",
-                "./../flashcard/styles.css"
+                "./../sub-components/flashcard/styles.css"
                 // "./styles.css"
             ],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     // "de": ["ccm.load", "./resources.mjs#de"],
-                    "de": ["ccm.load", "./../flashcard/resources.mjs#de"],
+                    "de": ["ccm.load", "./../sub-components/flashcard/resources.mjs#de"],
                     // "en": ["ccm.load", "./resources.mjs#en"],
-                    "en": ["ccm.load", "./../flashcard/resources.mjs#en"],
+                    "en": ["ccm.load", "./../sub-components/flashcard/resources.mjs#en"],
                 }
             }],
             // "text": ["ccm.load", "./resources.mjs#de"],
-            "text": ["ccm.load", "./../flashcard/resources.mjs#de"],
+            "text": ["ccm.load", "./../sub-components/flashcard/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "template": ["ccm.load", "./../flashcard/tamplates_flashcard.mjs"],
+            "template": ["ccm.load", "./../sub-components/flashcard/tamplates_flashcard.mjs"],
             // "template": ["ccm.load", "./tamplates_flashcard.mjs"],
             "flashcardObject" : {"id" : "stack_private_0", "topic" : "topic", "name": "Name", "stack": "stack_private" ,"description":"default  description", "translation": "default translation"},
         },

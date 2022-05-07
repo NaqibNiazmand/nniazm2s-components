@@ -10,23 +10,23 @@
         ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js',
         config: {
             "css": ["ccm.load",
-                // "./../sub-components/show_flashcards/styles.css"
-                "./styles.css"
+                "./../sub-components/show_flashcards/styles.css"
+                // "./styles.css"
             ],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
-                    "de": ["ccm.load", "./resources.mjs#de"],
-                    // "de": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#de"],
-                    "en": ["ccm.load", "./resources.mjs#en"],
-                    // "en": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#en"],
+                    // "de": ["ccm.load", "./resources.mjs#de"],
+                    "de": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#de"],
+                    // "en": ["ccm.load", "./resources.mjs#en"],
+                    "en": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./resources.mjs#de"],
-            // "text": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#de"],
+            // "text": ["ccm.load", "./resources.mjs#de"],
+            "text": ["ccm.load", "./../sub-components/show_flashcards/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            // "template": ["ccm.load", "./../sub-components/show_flashcards/tamplates_show_flashcards.mjs"],
-            "template": ["ccm.load", "./tamplates_show_flashcards.mjs"],
-            "flashcard": ["ccm.component", "./../flashcard/ccm.flashcard-1.0.0.js"],
+            "template": ["ccm.load", "./../sub-components/show_flashcards/tamplates_show_flashcards.mjs"],
+            // "template": ["ccm.load", "./tamplates_show_flashcards.mjs"],
+            "flashcard": ["ccm.component", "./../sub-components/flashcard/ccm.flashcard-1.0.0.js"],
         },
         Instance: function () {
             /**

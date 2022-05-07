@@ -114,7 +114,7 @@
                             },
                             {
                                 "title": title_show_flashcards,
-                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
+                                "content": [ "ccm.proxy", "./../sub-components/show_flashcards/ccm.show_flashcards-1.0.0.js" ]
                             },
                             {
                                 "title": title_start_training_pool,
