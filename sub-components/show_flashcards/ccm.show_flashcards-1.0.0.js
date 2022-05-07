@@ -103,18 +103,7 @@
                         ele.querySelector('#input_id').disabled = false;
                         if (this.value === "Collaboration stack" || this.value === "Kollaborationsstapel") {
                             //remove cards: stack_training and stack_private
-                            var checkCardsPrivate = ele.querySelector('#' + instance_data_stack_private[0].index)
-                            if (checkCardsPrivate != null) {
-                                for (let i = 0; i < instance_data_stack_private.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_private[i].root);
-                                }
-                            }
-                            var checkCardsTraining = ele.querySelector('#' + instance_data_stack_training[0].index)
-                            if (checkCardsTraining != null) {
-                                for (let i = 0; i < instance_data_stack_training.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_training[i].root);
-                                }
-                            }
+                            ele.querySelector('#body-form').innerHTML = '';
                             //add cards: stack_collaboration
                             for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
                                 ele.querySelector('#body-form').appendChild(instance_data_stack_collaboration[i].root);
@@ -127,15 +116,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_collaboration
-                                        for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_collaboration[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_collaboration[i].root);
                                         }
@@ -150,15 +138,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_collaboration
-                                        for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_collaboration[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_collaboration[i].root);
                                         }
@@ -173,15 +160,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_collaboration
-                                        for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_collaboration[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_collaboration[i].root);
                                         }
@@ -191,18 +177,7 @@
                         }
                         if (this.value === "Private stack" || this.value === "Privates Stapel") {
                             //remove cards: stack_collaboration and stack_training
-                            var checkCardsCollaboration = ele.querySelector('#' + instance_data_stack_collaboration[0].index)
-                            if (checkCardsCollaboration != null) {
-                                for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_collaboration[i].root);
-                                }
-                            }
-                            var checkCardsTrainingS = ele.querySelector('#' + instance_data_stack_training[0].index)
-                            if (checkCardsTrainingS != null) {
-                                for (let i = 0; i < instance_data_stack_training.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_training[i].root);
-                                }
-                            }
+                            ele.querySelector('#body-form').innerHTML = '';
                             //add cards: stack_private
                             for (let i = 0; i < instance_data_stack_private.length; i++) {
                                 ele.querySelector('#body-form').appendChild(instance_data_stack_private[i].root);
@@ -215,15 +190,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_private
-                                        for (let i = 0; i < instance_data_stack_private.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_private[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_private.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_private[i].root);
                                         }
@@ -238,15 +212,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_private
-                                        for (let i = 0; i < instance_data_stack_private.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_private[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_private.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_private[i].root);
                                         }
@@ -261,15 +234,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_private
-                                        for (let i = 0; i < instance_data_stack_private.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_private[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_private.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_private[i].root);
                                         }
@@ -279,18 +251,7 @@
                         }
                         if (this.value === "Training stack" || this.value === "Trainings Stapel") {
                             //remove cards: stack_collaboration and stack_private
-                            var checkCardsCollaborationS = ele.querySelector('#' + instance_data_stack_collaboration[0].index)
-                            if (checkCardsCollaborationS != null) {
-                                for (let i = 0; i < instance_data_stack_collaboration.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_collaboration[i].root);
-                                }
-                            }
-                            var checkCardsStackPrivate = ele.querySelector('#' + instance_data_stack_private[0].index)
-                            if (checkCardsStackPrivate != null) {
-                                for (let i = 0; i < instance_data_stack_private.length; i++) {
-                                    ele.querySelector('#body-form').removeChild(instance_data_stack_private[i].root);
-                                }
-                            }
+                            ele.querySelector('#body-form').innerHTML = '';
                             //add cards: stack_training
                             for (let i = 0; i < instance_data_stack_training.length; i++) {
                                 ele.querySelector('#body-form').appendChild(instance_data_stack_training[i].root);
@@ -303,15 +264,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_training
-                                        for (let i = 0; i < instance_data_stack_training.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_training[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_training.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_training[i].root);
                                         }
@@ -326,15 +286,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_training
-                                        for (let i = 0; i < instance_data_stack_training.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_training[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_training.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_training[i].root);
                                         }
@@ -349,15 +308,14 @@
                                     });
                                     if (results.length > 0) {
                                         // remove alls cards stack_training
-                                        for (let i = 0; i < instance_data_stack_training.length; i++) {
-                                            ele.querySelector('#body-form').removeChild(instance_data_stack_training[i].root);
-                                        }
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         // add filtered result to shadowDom
                                         for (let i = 0; i < results.length; i++) {
                                             ele.querySelector('#body-form').appendChild(results[i].root);
                                         }
                                     } else {
                                         // remove filter: add all cards
+                                        ele.querySelector('#body-form').innerHTML = '';
                                         for (let i = 0; i < instance_data_stack_training.length; i++) {
                                             ele.querySelector('#body-form').appendChild(instance_data_stack_training[i].root);
                                         }
