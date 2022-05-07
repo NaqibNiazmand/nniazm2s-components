@@ -9,23 +9,19 @@
         version: [1, 0, 0],
         ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js',
         config: {
-            "css": ["ccm.load",
-                "./../sub-components/create_flashcards/style.css"
+            "css": ["ccm.load", "./../sub-components/create_flashcards/style.css"
                 // "./style.css"
             ],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     // "de": ["ccm.load", "./resources.mjs#de"],
-                    "de": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"],
-                    // "en": ["ccm.load", "./resources.mjs#en"],
+                    "de": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"], // "en": ["ccm.load", "./resources.mjs#en"],
                     "en": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#en"],
                 }
-            }],
-            // "text": ["ccm.load", "./resources.mjs#de"],
+            }], // "text": ["ccm.load", "./resources.mjs#de"],
             "text": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "template": ["ccm.load", "./../sub-components/create_flashcards/tamplates_create_flashcards.mjs"],
-            // "template": ["ccm.load", "./tamplates_create_flashcards.mjs"],
+            "template": ["ccm.load", "./../sub-components/create_flashcards/tamplates_create_flashcards.mjs"], // "template": ["ccm.load", "./tamplates_create_flashcards.mjs"],
         },
         Instance: function () {
             /**
@@ -54,6 +50,7 @@
                  * @type {Function}
                  */
                 save_button: async () => {
+                    let alertMsg;
                     // Get values
                     var input_topic_value = this.element.querySelector("#input_topic_id").value
                     var input_name_value = this.element.querySelector("#input_name_id").value
@@ -63,33 +60,30 @@
 
                     //Check values for undefined or empty
                     if (input_topic_value === '' || input_topic_value === undefined) {
-                        var alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Thema aus!" : "Please fill in the field Topic!";
+                        alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Thema aus!" : "Please fill in the field Topic!";
                         alert(alertMsg)
                     } else if (input_name_value === '' || input_name_value === undefined) {
-                        var alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Name aus!" : "Please fill in the field Name!";
+                        alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Name aus!" : "Please fill in the field Name!";
                         alert(alertMsg)
                     } else if (select_stack_value === '' || select_stack_value === undefined) {
-                        var alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Stapel aus!" : "Please fill in the field Stack!";
+                        alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Stapel aus!" : "Please fill in the field Stack!";
                         alert(alertMsg)
                     } else if (card_description_value === '' || card_description_value === undefined || card_description_value.length === 1) {
-                        var alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Beschreibung aus!" : "Please fill in the field Description!";
+                        alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Beschreibung aus!" : "Please fill in the field Description!";
                         alert(alertMsg)
                     } else if (card_translation_value === '' || card_translation_value === undefined || card_translation_value.length === 1) {
-                        var alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Übersetzung aus!" : "Please fill in the field Translation!";
+                        alertMsg = this.lang.getValue() === "de" ? "Bitte füllen Sie das Feld Übersetzung aus!" : "Please fill in the field Translation!";
                         alert(alertMsg)
                     } else {
                         //Save values
                         const stack_training = await ccm.store({
-                            url: 'https://ccm2.inf.h-brs.de',
-                            name: 'nniazm2s_stack_training_store'
+                            url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_training_store'
                         });
                         const stack_private = await ccm.store({
-                            url: 'https://ccm2.inf.h-brs.de',
-                            name: 'nniazm2s_stack_private_store'
+                            url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_private_store'
                         });
                         const stack_collaboration = await ccm.store({
-                            url: 'https://ccm2.inf.h-brs.de',
-                            name: 'nniazm2s_stack_collaboration_store'
+                            url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
                         });
 
                         var flashcardObject = new Object();
@@ -105,55 +99,70 @@
                                 const lastIdValueGer = lastIdObjGer.value
                                 await stack_training.set({"key": "last_id", "value": (lastIdValueGer + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueGer;
-                                await stack_training.set({"key": ''+lastIdValueGer, "value": flashcardObject});
+                                await stack_training.set({"key": '' + lastIdValueGer, "value": flashcardObject});
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGer + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGer + " was created.";
+                                alert(alertMsg)
                                 break;
                             case "Training stack":
                                 const lastIdObjEn = await stack_training.get("last_id");
                                 const lastIdValueEn = lastIdObjEn.value
                                 await stack_training.set({"key": "last_id", "value": (lastIdValueEn + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueEn;
-                                await stack_training.set({"key": ''+lastIdValueEn, "value": flashcardObject});
+                                await stack_training.set({"key": '' + lastIdValueEn, "value": flashcardObject});
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEn + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEn + " was created.";
+                                alert(alertMsg)
                                 break;
                             case "Privates Stapel":
                                 const lastIdObjGerPri = await stack_private.get("last_id");
                                 const lastIdValueGerPri = lastIdObjGerPri.value
                                 await stack_private.set({"key": "last_id", "value": (lastIdValueGerPri + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueGerPri;
-                                await stack_private.set({"key": ''+lastIdValueGerPri, "value": flashcardObject});
+                                await stack_private.set({"key": '' + lastIdValueGerPri, "value": flashcardObject});
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerPri + " was created.";
+                                alert(alertMsg)
                                 break;
                             case "Private stack":
                                 const lastIdObjEnPri = await stack_private.get("last_id");
                                 const lastIdValueEnPri = lastIdObjEnPri.value
                                 await stack_private.set({"key": "last_id", "value": (lastIdValueEnPri + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueEnPri;
-                                await stack_private.set({"key": ''+lastIdValueEnPri, "value": flashcardObject});
+                                await stack_private.set({"key": '' + lastIdValueEnPri, "value": flashcardObject});
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnPri + " was created.";
+                                alert(alertMsg)
                                 break;
                             case "Kollaborationsstapel":
                                 const lastIdObjGerKol = await stack_collaboration.get("last_id");
                                 const lastIdValueGerKol = lastIdObjGerKol.value
                                 await stack_collaboration.set({"key": "last_id", "value": (lastIdValueGerKol + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueGerKol;
-                                await stack_collaboration.set({"key": ''+lastIdValueGerKol, "value": flashcardObject});
+                                await stack_collaboration.set({
+                                    "key": '' + lastIdValueGerKol, "value": flashcardObject
+                                });
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerKol + " was created.";
+                                alert(alertMsg)
                                 break;
                             case "Collaboration stack":
                                 const lastIdObjEnKol = await stack_collaboration.get("last_id");
                                 const lastIdValueEnKol = lastIdObjEnKol.value
                                 await stack_collaboration.set({"key": "last_id", "value": (lastIdValueEnKol + 1)}); // update lastID value
                                 flashcardObject.id = lastIdValueEnKol;
-                                await stack_collaboration.set({"key": ''+lastIdValueEnKol, "value": flashcardObject});
+                                await stack_collaboration.set({"key": '' + lastIdValueEnKol, "value": flashcardObject});
+                                events.cancel_button()
+                                alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnKol + " was created.";
+                                alert(alertMsg)
                                 break;
                             default:
-                                console.log("switch default");
+                                alertMsg = this.lang.getValue() === "de" ? "Etwas ist beim Stapel Auswahl schiefgelaufen." : "Something went wrong with the stack selection.";
+                                console.log(alertMsg);
+                                alert(alertMsg)
                         }
-                        //Clear form
-                        this.element.querySelector("#input_topic_id").value = ''
-                        this.element.querySelector("#input_name_id").value = ''
-                        this.element.querySelector("#select_stack_id").value = ''
-                        this.element.querySelector("#card_description_id").value = ''
-                        this.element.querySelector("#card_translation_id").value = ''
                     }
-                },
-                /**
+                }, /**
                  * cancel button control
                  * @type {Function}
                  */
