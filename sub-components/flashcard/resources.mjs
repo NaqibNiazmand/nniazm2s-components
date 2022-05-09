@@ -17,7 +17,7 @@ export const de = {
     "flashcard_stack_private" : "Privates Stapel",
     "flashcard_stack_collaboration" : "Kollaborationsstapel",
     "flashcard_add_btn" : "Lernkarte hinzufügen",
-
+    "flashcard_remove_btn": "Lernkarte entfernen",
 };
 
 /**
@@ -33,4 +33,5 @@ export const en = {
     "flashcard_stack_private" : "Private stack",
     "flashcard_stack_collaboration" : "Collaboration stack",
     "flashcard_add_btn" : "add flashcard",
+    "flashcard_remove_btn": "remove flashcard",
 };

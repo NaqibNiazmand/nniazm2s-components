@@ -34,7 +34,7 @@
                 }
             }],
             "text": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
-            "user": [ 'ccm.component', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js' ],
+            "user": [ 'ccm.component', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
             "home" : ["ccm.start", "./../sub-components/home/ccm.home-1.0.0.js"],
             "register_reg_btn" : ["ccm.start", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
             "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js"],
@@ -73,6 +73,7 @@
                     onchange: event => event ? render_logged_in() : render_logged_out(),
                     title: 'Please enter username and Password',
                 });
+                this.user = user
                 if(!user.isLoggedIn()){
                     this.home && $.append(this.element.querySelector('main'), this.home.root);
                 }else {
@@ -99,14 +100,17 @@
                 var title_crate_flashcards = this.lang.getValue() === "de" ? "Lernkarten erstellen" : "Create flashcards";
                 var title_generate_flashcards = this.lang.getValue() === "de" ? "Lernkarten generieren" : "Generate flashcards";
                 var title_show_flashcards = this.lang.getValue() === "de" ? "Lernkarten anzeigen" : "Show flashcards";
-                var title_start_training_pool = this.lang.getValue() === "de" ? "Trainingspool starten" : "Start training pool";
+                var title_edit_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel bearbeiten" : "Edit training stack";
+                var title_start_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel starten" : "Start training stack";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
+                    "selected": 1,
                     "data": {
                         "entries": [
                             {
                                 "title": title_crate_flashcards,
-                                "content": [ "ccm.proxy", "./../sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js" ]
+                                "content": [ "ccm.proxy", "./../sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js", {"user": this.user}],
+                                // "actions": [ [ "console.log", "Performed action of menu entry C." ] ]
                             },
                             {
                                 "title": title_generate_flashcards,
@@ -114,10 +118,14 @@
                             },
                             {
                                 "title": title_show_flashcards,
-                                "content": [ "ccm.proxy", "./../sub-components/show_flashcards/ccm.show_flashcards-1.0.0.js" ]
+                                "content": [ "ccm.proxy", "./../sub-components/show_flashcards/ccm.show_flashcards-1.0.0.js", {"user": this.user}]
                             },
                             {
-                                "title": title_start_training_pool,
+                                "title": title_edit_training_stack,
+                                "content": [ "ccm.proxy", "./../sub-components/edit_training_stack/ccm.edit_training_stack-1.0.0.js", {"user": this.user}]
+                            },
+                            {
+                                "title": title_start_training_stack,
                                 "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
                             }
                         ]

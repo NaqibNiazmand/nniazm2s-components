@@ -22,6 +22,7 @@
             "text": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
             "template": ["ccm.load", "./../sub-components/create_flashcards/tamplates_create_flashcards.mjs"], // "template": ["ccm.load", "./tamplates_create_flashcards.mjs"],
+            "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
         },
         Instance: function () {
             /**
@@ -76,12 +77,14 @@
                         alert(alertMsg)
                     } else {
                         //Save values
+                        var username = this.user.getUsername()
+                        const training_stack_name = 'nniazm2s_flashcards_training_stack_'+username
+                        const private_stack_name = 'nniazm2s_flashcards_private_stack_'+username
+
                         const stack_training = await ccm.store({
-                            url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_training_store'
-                        });
+                            "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name});
                         const stack_private = await ccm.store({
-                            url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_private_store'
-                        });
+                            "url": 'https://ccm2.inf.h-brs.de', "name": private_stack_name});
                         const stack_collaboration = await ccm.store({
                             url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
                         });

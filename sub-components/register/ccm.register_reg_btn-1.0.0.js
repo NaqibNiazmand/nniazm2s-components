@@ -71,17 +71,22 @@
                  * register confirm button control
                  * @type {Function}
                  */
-                confirm_button: () => {
+                confirm_button: async () => {
                     const username = document.getElementById('username').value
                     const password = document.getElementById("password").value;
                     const confirm_password = document.getElementById("repeat_password").value;
                     const md5Password = this.hash.md5(confirm_password);
                     let resultMsg;
+                    const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_store'});
+                    const check_user_already_exists = await store.get(username);
                     if (username.charAt(username.length - 2) === '2') {
                         resultMsg = this.lang.getValue() === "de" ? "Bitte an der vor letzten position keine 2 in Benutzernamen verwenden." : "Please do not use 2 in user names at the before last position.";
                         alert(resultMsg)
                     } else if (username === '' || password === null || password === '' || confirm_password === '' || confirm_password === null) {
                         resultMsg = this.lang.getValue() === "de" ? "Bitte alle Felder befüllen." : "Please fill in all fields.";
+                        alert(resultMsg)
+                    } else if (check_user_already_exists !== null ){
+                        resultMsg = this.lang.getValue() === "de" ? "Der Benutzer "+username +" existiert bereits. Bitte wählen Sie einen anderen Benutzernamen!" : "The user "+username +" already exists. Please choose another username!";
                         alert(resultMsg)
                     } else if (password === confirm_password && (password !== null || password !== '' || confirm_password !== '' || confirm_password !== null)) {
                         create_user(username, md5Password);
@@ -132,6 +137,15 @@
                         }
                     }
                 });
+
+                const private_stack_name = 'nniazm2s_flashcards_private_stack_'+username
+                const create_private_stack_for_user = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: private_stack_name});
+                await create_private_stack_for_user.set({ "key": "last_id", "value": 0 });
+
+                const training_stack_name = 'nniazm2s_flashcards_training_stack_'+username
+                const create_training_stack_for_user = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: training_stack_name});
+                await create_training_stack_for_user.set({ "key": "last_id", "value":0});
+
                 const resultMsg = this.lang.getValue() === "de" ? "Benutzer : " + username + " wurde erfolgreich erstellt." : "User : " + username + " was created successfully.";
                 alert(resultMsg)
                 this.ccm.start(this.smart_memorize, {root: document.body});
