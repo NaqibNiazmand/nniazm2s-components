@@ -1,5 +1,5 @@
 /**
- * @overview A new sub component. For displaying the flashcards.
+ * @overview A new sub component. For the editing of the training stack.
  * @author Naqib Niazmand <naqib.niazmand@smail.inf.h-brs.de>
  * @license The MIT License (MIT)
  */
