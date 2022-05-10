@@ -114,7 +114,9 @@
                             },
                             {
                                 "title": title_generate_flashcards,
-                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/image_map/versions/ccm.image_map-4.0.0.js", ["ccm.load","https://ccmjs.github.io/akless-components/image_map/resources/resources.mjs#demo"] ]
+                                //ToDo create sub component for the generation of flashcards from websites
+                                // "content": [ "ccm.proxy", "./../sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js", {"user": this.user}]
+                                "content": "ToDo: Create sub component for the generation of flashcards from websites"
                             },
                             {
                                 "title": title_show_flashcards,
@@ -126,7 +128,7 @@
                             },
                             {
                                 "title": title_start_training_stack,
-                                "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-2.0.0.js" ]
+                                "content": [ "ccm.proxy", "./../sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
                             }
                         ]
                     },

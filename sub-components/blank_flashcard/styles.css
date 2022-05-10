@@ -1,0 +1,101 @@
+html,
+body,
+main {
+    height: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: solid 1px gray;
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+
+.flip-card {
+    margin: 20px;
+    background-color: transparent;
+    width: 700px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:active .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front,
+.flip-card-back {
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: gold;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    background-color: silver;
+}
+
+#flashcard_data_front {
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    height: 100%;
+}
+
+#flashcard_data_back {
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    height: 100%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: gold;
+}
+
+#left_menu_topic_and_next_button{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: solid 1px gray;
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 10px;
+}
