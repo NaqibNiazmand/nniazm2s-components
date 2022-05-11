@@ -77,7 +77,7 @@
                     const confirm_password = document.getElementById("repeat_password").value;
                     const md5Password = this.hash.md5(confirm_password);
                     let resultMsg;
-                    const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_store'});
+                    const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_db'});
                     const check_user_already_exists = await store.get(username);
                     if (username.charAt(username.length - 2) === '2') {
                         resultMsg = this.lang.getValue() === "de" ? "Bitte an der vor letzten position keine 2 in Benutzernamen verwenden." : "Please do not use 2 in user names at the before last position.";
@@ -112,7 +112,7 @@
                 },
             }
             /**
-             * create user in https://ccm2.inf.h-brs.de with name nniazm2s_users_store
+             * create user in https://ccm2.inf.h-brs.de with name nniazm2s_users_db
              * @type {Function}
              */
             const create_user = async (username, password) => {
@@ -120,7 +120,7 @@
                 da Benutzernamen mit 2 am ende echte Hochschulseitige Account sein muss.
                 Nicht erlaubet Benutzernamen sind z.B. username2s oder username2m usw.
                 */
-                const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_store'});
+                const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_db'});
                 await store.set({
                     key: username,
                     user: username,

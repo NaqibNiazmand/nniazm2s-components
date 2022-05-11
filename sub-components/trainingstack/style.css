@@ -59,7 +59,6 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
-    border-bottom: solid 1px black;
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: 100%;

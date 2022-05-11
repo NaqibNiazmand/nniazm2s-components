@@ -69,7 +69,7 @@
                     realm: 'cloud',
                     hash: ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
                     url: 'https://ccm2.inf.h-brs.de',
-                    store: 'nniazm2s_users_store',
+                    store: 'nniazm2s_users_db',
                     onchange: event => event ? render_logged_in() : render_logged_out(),
                     title: 'Please enter username and Password',
                 });
@@ -104,7 +104,7 @@
                 var title_start_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel starten" : "Start training stack";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
-                    "selected": 1,
+                    "selected": 5,
                     "data": {
                         "entries": [
                             {

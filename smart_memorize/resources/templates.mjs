@@ -3,7 +3,7 @@
  * @author Naqib Niazmand <naqib.niazmand@smail.inf.h-brs.de>
  */
 
-import {html, render, repeat} from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
+import {html, render} from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
 
 export {render};
 
@@ -16,7 +16,6 @@ export {render};
 export function main() {
     return html`
         ${header_main()}
-        ${footer()}
     `;
 }
 
@@ -102,7 +101,6 @@ export function main_V_1_0_0(app) {
     return html`
         ${header_v_1_0_0()}
         ${mainContent_V_1_0_0(app)}
-        ${footer()}
     `;
 }
 

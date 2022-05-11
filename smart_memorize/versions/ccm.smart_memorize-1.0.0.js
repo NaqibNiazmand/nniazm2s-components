@@ -38,7 +38,7 @@
                     realm: 'cloud',
                     hash: ["ccm.load", "https://ccmjs.github.io/akless-components/modules/md5.mjs"],
                     url: 'https://ccm2.inf.h-brs.de',
-                    store: 'nniazm2s_users_store'
+                    store: 'nniazm2s_users_db'
                 }],
             "menu": ["ccm.load", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js#bootstrap",],
             "register_reg_btn" : ["ccm.start", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
@@ -70,7 +70,7 @@
                  * @type {Function}
                  */
                 login: async () => {
-                    const store = await ccm.store({ url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_store' });
+                    const store = await ccm.store({ url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_db' });
                     const result = await store.get('Test');
                     console.log('result ', result);
                 },
@@ -134,7 +134,7 @@
             }
 
             /**
-             * create user in https://ccm2.inf.h-brs.de with name nniazm2s_users_store
+             * create user in https://ccm2.inf.h-brs.de with name nniazm2s_users_db
              * @type {Function}
              */
             const create_user = async (username, password) => {
@@ -142,7 +142,7 @@
                 da Benutzernamen mit 2 am ende echte Hochschulseitige Account sein muss.
                 Nicht erlaubet Benutzernamen sind z.B. username2s oder username2m usw.
                 */
-                const store = await ccm.store({ url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_store' });
+                const store = await ccm.store({ url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_db' });
                 await store.set({
                     key: username,
                     token: password, // passwort muss als md5 wert abgespeichert werden!

@@ -9,8 +9,12 @@
  * @type {Object}
  */
 export const de = {
-    header_topic: "Thema",
-    footer_form_button_next: "Nächste Lernkarte",
+    menu_left_topic: "Thema",
+    menu_left_check_translation :"Übersetzung überprüfen",
+    menu_left_enter_translation :"Übersetzung eingeben",
+    menu_left_button_next: "Nächste Lernkarte",
+    menu_left_next_flashcard_label_part_1: "Klicken Sie hier für",
+    menu_left_next_flashcard_label_part_2: "die nächste Lernkarte:",
 };
 
 /**
@@ -18,6 +22,10 @@ export const de = {
  * @type {Object}
  */
 export const en = {
-    header_topic: "Topic",
-    footer_form_button_next: "Next flashcard",
+    menu_left_topic: "Topic",
+    menu_left_check_translation :"Check translation",
+    menu_left_enter_translation :"Enter translation",
+    menu_left_button_next: "Next flashcard",
+    menu_left_next_flashcard_label_part_1: "Click here for",
+    menu_left_next_flashcard_label_part_2: "the next flashcard:",
 };

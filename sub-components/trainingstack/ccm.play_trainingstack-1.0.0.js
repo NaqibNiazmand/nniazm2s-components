@@ -14,7 +14,16 @@
                 "ccm.load",
                 "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs",
             ],
-            text: ["ccm.load", "./../sub-components/trainingstack/resources.mjs#de"],
+            "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
+                "translations": {
+                    // "de": ["ccm.load", "./resources.mjs#de"],
+                    "de": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#de"],
+                    // "en": ["ccm.load", "./resources.mjs#en"],
+                    "en": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#en"],
+                }
+            }],
+            // "text": ["ccm.load", "./resources.mjs#de"],
+            "text": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#de"],
             template: [
                 "ccm.load",
                 "./../sub-components/trainingstack/templates_play_trainingstack.mjs",
@@ -32,6 +41,8 @@
              */
             let $;
             const self = this;
+            let current_card = {};
+            let blank_flashcard_instance;
             /**
              * when the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready
              * @returns {Promise<void>}
@@ -49,6 +60,11 @@
             const events = {
                 next_button: async () => {
                     nextCard();
+                },
+                menu_left_check_translation_button: async () => {
+                    const to_check_translation_value = this.element.querySelector('#menu_left_enter_translation_input').value;
+                    var correct = (current_card.translation === to_check_translation_value);
+                    blank_flashcard_instance.element.querySelector( '.flip-card-front' ).style.backgroundColor = correct ? 'lime' : 'red';
                 },
             };
             /**
@@ -77,10 +93,12 @@
                 }
                 console.log(
                     data[index].then(async (card) => {
-                        console.log(card);
+                        console.log("card",card);
+                        current_card = card;
                         const instance = await this.blank_flashcard.start({
                             flashcardObject: card,
                         });
+                        blank_flashcard_instance = instance
                         this.element.querySelector(
                             "#start_training_stack"
                         ).innerHTML = ``;
