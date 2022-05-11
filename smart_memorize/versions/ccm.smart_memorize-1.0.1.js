@@ -104,7 +104,7 @@
                 var title_start_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel starten" : "Start training stack";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
-                    "selected": 5,
+                    "selected": 1,
                     "data": {
                         "entries": [
                             {
