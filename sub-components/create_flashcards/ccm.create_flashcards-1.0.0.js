@@ -9,19 +9,19 @@
         version: [1, 0, 0],
         ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js',
         config: {
-            "css": ["ccm.load", "./../sub-components/create_flashcards/style.css"
+            "css": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/style.css"
                 // "./style.css"
             ],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     // "de": ["ccm.load", "./resources.mjs#de"],
-                    "de": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"], // "en": ["ccm.load", "./resources.mjs#en"],
-                    "en": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#en"],
+                    "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/resources.mjs#de"], // "en": ["ccm.load", "./resources.mjs#en"],
+                    "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/resources.mjs#en"],
                 }
             }], // "text": ["ccm.load", "./resources.mjs#de"],
-            "text": ["ccm.load", "./../sub-components/create_flashcards/resources.mjs#de"],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "template": ["ccm.load", "./../sub-components/create_flashcards/tamplates_create_flashcards.mjs"], // "template": ["ccm.load", "./tamplates_create_flashcards.mjs"],
+            "template": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/tamplates_create_flashcards.mjs"], // "template": ["ccm.load", "./tamplates_create_flashcards.mjs"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
         },
         Instance: function () {

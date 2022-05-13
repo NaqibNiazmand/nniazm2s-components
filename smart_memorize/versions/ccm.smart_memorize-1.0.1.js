@@ -19,24 +19,24 @@
                 [  // serial
                     "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
                     "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-dark.min.css",
-                    "./resources/styles.css"
+                    "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/styles.css"
                 ],
                 "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
                 { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
             ],
             "hash": [ "ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs" ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
-            "html": ["ccm.load","./../smart_memorize/resources/templates.mjs"],
+            "html": ["ccm.load","https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/templates.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
-                    "de": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
-                    "en": ["ccm.load", "./../smart_memorize/resources/resources.mjs#en"],
+                    "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/resources.mjs#de"],
+                    "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./../smart_memorize/resources/resources.mjs#de"],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/resources.mjs#de"],
             "user": [ 'ccm.component', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
-            "home" : ["ccm.start", "./../sub-components/home/ccm.home-1.0.0.js"],
-            "register_reg_btn" : ["ccm.start", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
+            "home" : ["ccm.start", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/ccm.home-1.0.0.js"],
+            "register_reg_btn" : ["ccm.start", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/ccm.register_reg_btn-1.0.0.js"],
             "menu": ["ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.11.0.js"],
         },
         Instance: function () {

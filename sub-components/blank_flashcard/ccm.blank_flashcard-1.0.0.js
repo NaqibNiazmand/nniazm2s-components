@@ -11,7 +11,7 @@
         config: {
             css: [
                 "ccm.load",
-                "./../sub-components/blank_flashcard/styles.css",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/styles.css",
                 // "./styles.css"
             ],
             lang: [
@@ -20,21 +20,21 @@
                 {
                     translations: {
                         // "de": ["ccm.load", "./resources.mjs#de"],
-                        de: ["ccm.load", "./../sub-components/flashcard/resources.mjs#de"],
+                        de: ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/resources.mjs#de"],
                         // "en": ["ccm.load", "./resources.mjs#en"],
-                        en: ["ccm.load", "./../sub-components/flashcard/resources.mjs#en"],
+                        en: ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/resources.mjs#en"],
                     },
                 },
             ],
             // "text": ["ccm.load", "./resources.mjs#de"],
-            text: ["ccm.load", "./../sub-components/flashcard/resources.mjs#de"],
+            text: ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/resources.mjs#de"],
             helper: [
                 "ccm.load",
                 "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs",
             ],
             template: [
                 "ccm.load",
-                "./../sub-components/blank_flashcard/templates_blank_flashcard.mjs",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/templates_blank_flashcard.mjs",
             ],
             // "template": ["ccm.load", "./tamplates_flashcard.mjs"],
             flashcardObject: {
