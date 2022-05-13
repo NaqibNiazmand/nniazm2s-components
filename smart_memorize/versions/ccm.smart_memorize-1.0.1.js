@@ -120,7 +120,7 @@
                             },
                             {
                                 "title": title_show_flashcards,
-                                "content": [ "ccm.proxy", "./../sub-components/show_flashcards/ccm.show_flashcards-1.0.0.js", {"user": this.user}]
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/show_flashcards/ccm.show_flashcards-1.0.0.js", {"user": this.user}]
                             },
                             {
                                 "title": title_edit_training_stack,
