@@ -27,6 +27,7 @@
             "hash": [ "ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs" ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
             "html": ["ccm.load","https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/templates.mjs"],
+            // "html": ["ccm.load","./../smart_memorize/resources/templates.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/resources.mjs#de"],

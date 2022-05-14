@@ -28,7 +28,7 @@ export function header_main() {
         <header>
             <section>
                 <!-- logo -->
-                <img src="./resources/Logo.PNG" alt="Logo Picture" height="100px" width="200px"></img>
+                <img src="https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/Logo.PNG" alt="Logo Picture" height="100px" width="200px"></img>
             </section>
             <section class="d-flex align-items-center">
             </section>

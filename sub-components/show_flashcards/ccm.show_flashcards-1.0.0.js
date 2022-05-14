@@ -25,7 +25,7 @@
             "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/show_flashcards/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
             "template": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/show_flashcards/tamplates_show_flashcards.mjs"],
-            // "template": ["ccm.load", "./tamplates_show_flashcards.mjs"],
+            // "template": ["ccm.load", "./tamplates_edit_training_stack.mjs"],
             "flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/ccm.flashcard-1.0.0.js"],
             // "flashcard": ["ccm.component", "./../flashcard/ccm.flashcard-1.0.0.js"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],

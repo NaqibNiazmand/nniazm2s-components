@@ -55,7 +55,7 @@ export function mainContent(app, events, flashcardObject) {
             </main>
         </div>
     `;
-    }else if(app.user.isLoggedIn() === false){
+    }else if(app.user.isLoggedIn() === false && app.button !== "flashcard_remove_button"){
         return html`
         <div id="represent_flashcard_id">
             <section class="d-flex align-items-center">

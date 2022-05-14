@@ -38,6 +38,7 @@
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
             "button": "flashcard_add_button",
             // "button": "flashcard_remove_button",
+            "training_stack_cards":[],
         },
         Instance: function () {
             /**
@@ -240,12 +241,19 @@
                  * @type {Function}
                  */
                 flashcard_remove_button: async () => {
-                    var username = this.user.getUsername()
-                    const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
-                    const stack_training = await ccm.store({
-                        "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
-                    });
-                    await stack_training.del(this.flashcardObject.id + "")
+                    if(this.user.isLoggedIn() === true) {
+                        var username = this.user.getUsername()
+                        const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
+                        const stack_training = await ccm.store({
+                            "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
+                        });
+                        await stack_training.del(this.flashcardObject.id + "")
+                    }else {
+                        let remove_card = this.training_stack_cards.find(element => element.id === this.flashcardObject.id);
+                        this.training_stack_cards = this.training_stack_cards.filter(function (card) {
+                            return card === remove_card;
+                        })
+                    }
                     let alertMsg;
                     alertMsg = this.lang.getValue() === "de" ? "Die Lernkarte mit der ID: " + this.flashcardObject.id + " wurde Erfolgreich gelöscht." : "The flashcard with the ID: " + this.flashcardObject.id + " was successfully deleted.";
                     alert(alertMsg)
