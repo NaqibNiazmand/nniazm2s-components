@@ -27,7 +27,38 @@
             "template": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/show_flashcards/tamplates_show_flashcards.mjs"],
             // "template": ["ccm.load", "./tamplates_show_flashcards.mjs"],
             "flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/ccm.flashcard-1.0.0.js"],
+            // "flashcard": ["ccm.component", "./../flashcard/ccm.flashcard-1.0.0.js"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
+            "private_stack_cards": [{
+                "id": "0",
+                "topic": "topic1",
+                "name": "Name1",
+                "stack": "Private stack",
+                "description": "default  description1",
+                "translation": "default translation1"
+            }, {
+                "id": "1",
+                "topic": "topic2",
+                "name": "Name2",
+                "stack": "Private stack",
+                "description": "default  description2",
+                "translation": "default translation2"
+            }],
+            "training_stack_cards": [{
+                "id": "0",
+                "topic": "topic1",
+                "name": "Name1",
+                "stack": "Training stack",
+                "description": "default  description1",
+                "translation": "default translation1"
+            }, {
+                "id": "1",
+                "topic": "topic2",
+                "name": "Name2",
+                "stack": "Training stack",
+                "description": "default  description2",
+                "translation": "default translation2"
+            }],
 
         },
         Instance: function () {
@@ -59,27 +90,31 @@
                 // Render content
                 render()
                 //get stacks
-                var username = this.user.getUsername()
-                const training_stack_name = 'nniazm2s_flashcards_training_stack_'+username
-                const private_stack_name = 'nniazm2s_flashcards_private_stack_'+username
+                if(this.user.isLoggedIn() === true) {
+                    var username = this.user.getUsername()
+                    const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
+                    const private_stack_name = 'nniazm2s_flashcards_private_stack_' + username
 
-                const stack_training = await ccm.store({
-                    "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
-                });
-                const stack_private = await ccm.store({
-                    "url": 'https://ccm2.inf.h-brs.de', "name": private_stack_name
-                });
+                    const stack_training = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
+                    });
+                    const stack_private = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": private_stack_name
+                    });
+                    //get data
+                    const data_stack_training = await stack_training.get();
+                    const data_stack_private = await stack_private.get();
+                    // remove last_id element from data, because is not a flashcard
+                    data_stack_training.shift()
+                    data_stack_private.shift()
+                }
+                // stack_collaboration for all
                 const stack_collaboration = await ccm.store({
                     url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
                 });
-                //get data
-                const data_stack_training = await stack_training.get();
-                const data_stack_private = await stack_private.get();
                 const data_stack_collaboration = await stack_collaboration.get();
-                // remove last_id element from data, because is not a flashcard
-                data_stack_training.shift()
-                data_stack_private.shift()
                 data_stack_collaboration.shift()
+
                 /* instance data for filtering*/
                 var instance_data_stack_private = [];
                 var instance_data_stack_training = [];
@@ -87,23 +122,42 @@
 
                 //clear body
                 this.element.querySelector('#body-form').innerHTML = '';
+
                 // show data
-                data_stack_private.forEach(async flashcard => {
-                    const instance = await this.flashcard.start({
-                        flashcardObject: flashcard.value,
-                        user: this.user,
+                if(this.user.isLoggedIn() === false) {
+                   this.private_stack_cards.forEach(async flashcard => {
+                        const instance = await this.flashcard.start({
+                            flashcardObject: flashcard,
+                        });
+                        instance_data_stack_private.push(instance)
+                        this.element.querySelector('#body-form').appendChild(instance.root);
                     });
-                    instance_data_stack_private.push(instance)
-                    this.element.querySelector('#body-form').appendChild(instance.root);
-                });
-                data_stack_training.forEach(async flashcard => {
-                    const instance = await this.flashcard.start({
-                        flashcardObject: flashcard.value,
-                        user: this.user,
+                    this.training_stack_cards.forEach(async flashcard => {
+                        const instance = await this.flashcard.start({
+                            flashcardObject: flashcard,
+                        });
+                        instance_data_stack_training.push(instance)
+                        this.element.querySelector('#body-form').appendChild(instance.root);
                     });
-                    instance_data_stack_training.push(instance)
-                    this.element.querySelector('#body-form').appendChild(instance.root);
-                });
+                }else{
+                    data_stack_private.forEach(async flashcard => {
+                        const instance = await this.flashcard.start({
+                            flashcardObject: flashcard.value,
+                            user: this.user,
+                        });
+                        instance_data_stack_private.push(instance)
+                        this.element.querySelector('#body-form').appendChild(instance.root);
+                    });
+                    data_stack_training.forEach(async flashcard => {
+                        const instance = await this.flashcard.start({
+                            flashcardObject: flashcard.value,
+                            user: this.user,
+                        });
+                        instance_data_stack_training.push(instance)
+                        this.element.querySelector('#body-form').appendChild(instance.root);
+                    });
+                }
+
                 data_stack_collaboration.forEach(async flashcard => {
                     const instance = await this.flashcard.start({
                         flashcardObject: flashcard.value,
@@ -112,6 +166,7 @@
                     instance_data_stack_collaboration.push(instance)
                     this.element.querySelector('#body-form').appendChild(instance.root);
                 });
+
                 //Only if a stack is selected, then filtering by theme, name or ID is allowed.
                 let ele = this.element
                 this.element.querySelector('#select_stack_id').addEventListener('change', function () {

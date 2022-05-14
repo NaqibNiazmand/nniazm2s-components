@@ -25,6 +25,7 @@
             "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/resources.mjs#de"],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
             "template": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/tamplates_flashcard.mjs"],
+            // "template": ["ccm.load", "./../flashcard/tamplates_flashcard.mjs"],
             // "template": ["ccm.load", "./tamplates_flashcard.mjs"],
             "flashcardObject": {
                 "id": "stack_private_0",
@@ -36,6 +37,7 @@
             },
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
             "button": "flashcard_add_button",
+            // "button": "flashcard_remove_button",
         },
         Instance: function () {
             /**
@@ -180,7 +182,10 @@
                                 } else {
                                     const lastIdObjGerKol = await stack_collaboration.get("last_id");
                                     const lastIdValueGerKol = lastIdObjGerKol.value
-                                    await stack_collaboration.set({"key": "last_id", "value": (lastIdValueGerKol + 1)}); // update lastID value
+                                    await stack_collaboration.set({
+                                        "key": "last_id",
+                                        "value": (lastIdValueGerKol + 1)
+                                    }); // update lastID value
                                     this.flashcardObject.id = lastIdValueGerKol;
                                     this.flashcardObject.stack = "Kollaborationsstapel";
                                     await stack_collaboration.set({
@@ -202,7 +207,10 @@
                                 } else {
                                     const lastIdObjEnKol = await stack_collaboration.get("last_id");
                                     const lastIdValueEnKol = lastIdObjEnKol.value
-                                    await stack_collaboration.set({"key": "last_id", "value": (lastIdValueEnKol + 1)}); // update lastID value
+                                    await stack_collaboration.set({
+                                        "key": "last_id",
+                                        "value": (lastIdValueEnKol + 1)
+                                    }); // update lastID value
                                     this.flashcardObject.id = lastIdValueEnKol;
                                     this.flashcardObject.stack = "Kollaborationsstapel";
                                     await stack_collaboration.set({
@@ -237,9 +245,9 @@
                     const stack_training = await ccm.store({
                         "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
                     });
-                    await stack_training.del(this.flashcardObject.id+"")
+                    await stack_training.del(this.flashcardObject.id + "")
                     let alertMsg;
-                    alertMsg = this.lang.getValue() === "de" ? "Die Lernkarte mit der ID: " +this.flashcardObject.id +" wurde Erfolgreich gelöscht." : "The flashcard with the ID: " +this.flashcardObject.id +" was successfully deleted.";
+                    alertMsg = this.lang.getValue() === "de" ? "Die Lernkarte mit der ID: " + this.flashcardObject.id + " wurde Erfolgreich gelöscht." : "The flashcard with the ID: " + this.flashcardObject.id + " was successfully deleted.";
                     alert(alertMsg)
                     this.element.innerHTML = ''
                 },
