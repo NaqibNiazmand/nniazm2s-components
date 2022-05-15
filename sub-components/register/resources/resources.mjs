@@ -27,6 +27,7 @@ export const de = {
     "confirm_button_text" : "Bestätigen",
     "smart_memorize_services_user_profil" : "Um die Möglichkeiten des Smart Memorize nutzen zu können, benötigen sie einen Kostenlosen Benutzerprofil.",
     "user_registration_click" : "Zur Registrierung klicken sie auf den Registierungsbutton:",
+    "button_back_to_smart_memorize": "zurück zu Smart Memorize"
 };
 
 /**
@@ -52,6 +53,7 @@ export const en = {
     "confirm_button_text" : "Confirm",
     "smart_memorize_services_user_profil" : "To be able to use the features of Smart Memorize, you need a free user profile.",
     "user_registration_click" : "Click on the registration button to register:",
+    "button_back_to_smart_memorize": "Back to Smart Memorize"
 };
 
 /**

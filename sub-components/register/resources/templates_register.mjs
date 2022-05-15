@@ -117,6 +117,9 @@ export function registieren(app, events) {
                 <button type="button" @click=${events.confirm_button} class="button button1"
                         data-lang="confirm_button_text"> ${app.text.confirm_button_text}
                 </button>
+                <button type="button" @click=${events.back_to_smart_memorize} class="button button1"
+                        data-lang="button_back_to_smart_memorize"> ${app.text.button_back_to_smart_memorize}
+                </button>
             </form>
         </div>
     `;

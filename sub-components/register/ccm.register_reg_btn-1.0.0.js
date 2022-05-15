@@ -21,14 +21,16 @@
                 },
             ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "html": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/templates_register.mjs"],
+            // "html": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/templates_register.mjs"],
+            "html": ["ccm.load", "./../register/resources/templates_register.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
                     "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
                     "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
+            // "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
+            "text": ["ccm.load", "./../register/resources/resources.mjs#de"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
             "hash": ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
             "smart_memorize" : ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/versions/ccm.smart_memorize-1.0.1.js"],
@@ -61,20 +63,16 @@
                  * @type {Function}
                  */
                 register_button: async () => {
-                    document.body.innerHTML = ''
-                    const divEle = document.createElement('div');
-                    divEle.setAttribute('id', 'divForRegistration')
-                    this.html.render(this.html.registieren(this, events), divEle);
-                    document.body.appendChild(divEle)
+                    this.html.render(this.html.registieren(this, events), document.body);
                 },
                 /**
                  * register confirm button control
                  * @type {Function}
                  */
                 confirm_button: async () => {
-                    const username = document.getElementById('username').value
-                    const password = document.getElementById("password").value;
-                    const confirm_password = document.getElementById("repeat_password").value;
+                    const username = this.element.querySelector('#username').value
+                    const password = this.element.querySelector('#password').value;
+                    const confirm_password = this.element.querySelector('#repeat_password').value;
                     const md5Password = this.hash.md5(confirm_password);
                     let resultMsg;
                     const store = await ccm.store({url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_users_db'});
@@ -100,8 +98,8 @@
                  * @type {Function}
                  */
                 showPassword: () => {
-                    const input_password = document.getElementById("password");
-                    const input_confirm_password = document.getElementById("repeat_password");
+                    const input_password = this.element.querySelector('#password');
+                    const input_confirm_password = this.element.querySelector('#repeat_password');
                     if (input_password.type === "password" || input_confirm_password.type === "password") {
                         input_password.type = "text";
                         input_confirm_password.type = "text";
@@ -109,6 +107,13 @@
                         input_password.type = "password";
                         input_confirm_password.type = "password";
                     }
+                },
+                /**
+                 * start smart memorize button control
+                 * @type {Function}
+                 */
+                back_to_smart_memorize: () => {
+                    this.ccm.start(this.smart_memorize, {root: document.body});
                 },
             }
             /**
@@ -148,7 +153,7 @@
 
                 const resultMsg = this.lang.getValue() === "de" ? "Benutzer : " + username + " wurde erfolgreich erstellt." : "User : " + username + " was created successfully.";
                 alert(resultMsg)
-                this.ccm.start(this.smart_memorize, {root: document.body});
+                // this.ccm.start(this.smart_memorize, {root: document.body});
             }
 
             /**

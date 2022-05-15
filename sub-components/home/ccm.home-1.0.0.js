@@ -18,7 +18,8 @@
                 }
             }],
             "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/resources/resources.mjs#de"],
-            "register_reg_btn" : ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/ccm.register_reg_btn-1.0.0.js"],
+            // "register_reg_btn" : ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/ccm.register_reg_btn-1.0.0.js"],
+            "register_reg_btn" : ["ccm.component", "./../register/ccm.register_reg_btn-1.0.0.js"],
 
         },
         Instance: function () {
