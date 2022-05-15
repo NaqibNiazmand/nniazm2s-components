@@ -105,7 +105,7 @@
                 var title_start_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel starten" : "Start training stack";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
-                    "css":  ["ccm.load", "./../smart_memorize/resources/menu.css"],
+                    "css":  ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css"],
                     "selected": 1,
                     "data": {
                         "entries": [

@@ -21,16 +21,16 @@
                 },
             ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            // "html": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/templates_register.mjs"],
-            "html": ["ccm.load", "./../register/resources/templates_register.mjs"],
+            "html": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/templates_register.mjs"],
+            // "html": ["ccm.load", "./../register/resources/templates_register.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
                     "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
                     "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#en"],
                 }
             }],
-            // "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
-            "text": ["ccm.load", "./../register/resources/resources.mjs#de"],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/resources/resources.mjs#de"],
+            // "text": ["ccm.load", "./../register/resources/resources.mjs#de"],
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
             "hash": ["ccm.load", "https://kaul.inf.h-brs.de/ccmjs/akless-components/modules/md5.mjs"],
             "smart_memorize" : ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/versions/ccm.smart_memorize-1.0.1.js"],
@@ -153,7 +153,6 @@
 
                 const resultMsg = this.lang.getValue() === "de" ? "Benutzer : " + username + " wurde erfolgreich erstellt." : "User : " + username + " was created successfully.";
                 alert(resultMsg)
-                // this.ccm.start(this.smart_memorize, {root: document.body});
             }
 
             /**
