@@ -10,15 +10,15 @@
         ccm: 'https://ccmjs.github.io/ccm/ccm.js',
         config: {
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs"],
-            "template": ["ccm.load", "./../sub-components/home/resources/templates_home.mjs"],
+            "template": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/resources/templates_home.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
                 "translations": {
-                    "de": ["ccm.load", "./../sub-components/home/resources/resources.mjs#de"],
-                    "en": ["ccm.load", "./../sub-components/home/resources/resources.mjs#en"],
+                    "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/resources/resources.mjs#de"],
+                    "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/resources/resources.mjs#en"],
                 }
             }],
-            "text": ["ccm.load", "./../sub-components/home/resources/resources.mjs#de"],
-            "register_reg_btn" : ["ccm.component", "./../sub-components/register/ccm.register_reg_btn-1.0.0.js"],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/home/resources/resources.mjs#de"],
+            "register_reg_btn" : ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/register/ccm.register_reg_btn-1.0.0.js"],
 
         },
         Instance: function () {

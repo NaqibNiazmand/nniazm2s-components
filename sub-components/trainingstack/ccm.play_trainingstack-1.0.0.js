@@ -9,7 +9,7 @@
         version: [1, 0, 0],
         ccm: "https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js",
         config: {
-            css: ["ccm.load", "./../sub-components/trainingstack/style.css"],
+            css: ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/style.css"],
             helper: [
                 "ccm.load",
                 "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs",
@@ -17,22 +17,37 @@
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     // "de": ["ccm.load", "./resources.mjs#de"],
-                    "de": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#de"],
+                    "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/resources.mjs#de"],
                     // "en": ["ccm.load", "./resources.mjs#en"],
-                    "en": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#en"],
+                    "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/resources.mjs#en"],
                 }
             }],
             // "text": ["ccm.load", "./resources.mjs#de"],
-            "text": ["ccm.load", "./../sub-components/trainingstack/resources.mjs#de"],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/resources.mjs#de"],
             template: [
                 "ccm.load",
-                "./../sub-components/trainingstack/templates_play_trainingstack.mjs",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/templates_play_trainingstack.mjs",
             ],
             blank_flashcard: [
                 "ccm.component",
-                "./../sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
             ],
-            "user": [ 'ccm.component', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
+            "user": [ 'ccm.start', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
+            "training_stack_cards": [{
+                "id": "0",
+                "topic": "topic1",
+                "name": "Name1",
+                "stack": "Training stack",
+                "description": "default  description1",
+                "translation": "default translation1"
+            }, {
+                "id": "1",
+                "topic": "topic2",
+                "name": "Name2",
+                "stack": "Training stack",
+                "description": "default  description2",
+                "translation": "default translation2"
+            }],
         },
         Instance: function () {
             /**
@@ -112,37 +127,65 @@
             this.start = async () => {
                 render();
                 this.element.querySelector("#start_training_stack").innerHTML = ``;
-                var username = this.user.getUsername()
-                const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
-                const stack_training = await ccm.store({
-                    "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
-                });
-                const data_stack_training = await stack_training.get();
-                data_stack_training.shift();
-                const topics = Array.from(
-                    new Set(data_stack_training.map((item) => item.value.topic))
-                );
+                let stack_training;
+                if(this.user.isLoggedIn() === true) {
+                    var username = this.user.getUsername()
+                    const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
+                    stack_training = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
+                    });
+                }
+
+                let data_stack_training = [];
+                let topics = [];
+                if(this.user.isLoggedIn() === true) {
+                    data_stack_training = await stack_training.get();
+                    data_stack_training.shift();
+                    topics = Array.from(
+                        new Set(data_stack_training.map((item) => item.value.topic))
+                    );
+                }else {
+                    data_stack_training = this.training_stack_cards;
+                    topics = Array.from(
+                        new Set(data_stack_training.map((item) => item.topic))
+                    );
+                }
                 topics.forEach(async (topic) => {
                     var option = document.createElement("option");
                     option.value = topic;
                     option.innerText = topic;
                     this.element.querySelector("#select-topics").appendChild(option);
                 });
+
                 let ele = this.element;
                 let $ = this;
+                let user = this.user;
                 // When starting training stack
                 var selectedTopic = this.element.querySelector("#select-topics").value
                 if (selectedTopic !== "") {
                     this.element.querySelector("#start_training_stack").innerHTML = ``;
                     this.element.index = 0;
-                    const stack_data = await data_stack_training
-                        .filter((stack) => stack.value.topic === selectedTopic)
-                        .map(async (flashcard) => {
-                            const value = await flashcard.value;
-                            return value;
-                        });
-                    console.log(stack_data);
-                    $.mystore = stack_data;
+
+                    if(user.isLoggedIn() === true) {
+                        const stack_data = await data_stack_training
+                            .filter((stack) => stack.value.topic === selectedTopic)
+                            .map(async (flashcard) => {
+                                const value = await flashcard.value;
+                                return value;
+                            });
+                        console.log(stack_data);
+                        $.mystore = stack_data;
+                    }else {
+                        const stack_data = await data_stack_training
+                            .filter((stack) => stack.topic === selectedTopic)
+                            .map(async (flashcard) => {
+                                const value = await flashcard;
+                                return value;
+                            });
+                        console.log(stack_data);
+                        $.mystore = stack_data;
+                    }
+
                     await nextCard();
                 }
                 // When the topic is changed
@@ -152,14 +195,25 @@
                         if (this.value !== "") {
                             ele.querySelector("#start_training_stack").innerHTML = ``;
                             ele.index = 0;
-                            const stack_data = await data_stack_training
-                                .filter((stack) => stack.value.topic === this.value)
-                                .map(async (flashcard) => {
-                                    const value = await flashcard.value;
-                                    return value;
-                                });
-                            console.log(stack_data);
-                            $.mystore = stack_data;
+                            if(user.isLoggedIn() === true) {
+                                const stack_data = await data_stack_training
+                                    .filter((stack) => stack.value.topic === this.value)
+                                    .map(async (flashcard) => {
+                                        const value = await flashcard.value;
+                                        return value;
+                                    });
+                                console.log(stack_data);
+                                $.mystore = stack_data;
+                            }else{
+                                const stack_data = await data_stack_training
+                                    .filter((stack) => stack.topic === this.value)
+                                    .map(async (flashcard) => {
+                                        const value = await flashcard;
+                                        return value;
+                                    });
+                                console.log(stack_data);
+                                $.mystore = stack_data;
+                            }
                             await nextCard();
                         }
                     });

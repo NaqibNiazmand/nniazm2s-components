@@ -23,13 +23,13 @@ export function mainContent(app) {
                     </select>
                     <label class="space_class"></label>
                     <label data-lang="header_topic">${app.text.header_topic}</label>
-                    <input type="text" name="input_topic" id="input_topic_id" disabled="true"/>
+                    <input type="text" name="input_topic" id="input_topic_id" >
                     <label class="space_class"></label>
                     <label data-lang="header_name">${app.text.header_name}</label>
-                    <input type="text" name="input_name" id="input_name_id" disabled="true"/>
+                    <input type="text" name="input_name" id="input_name_id"/>
                     <label class="space_class"></label>
                     <label data-lang="header_id">${app.text.header_id}</label>
-                    <input type="text" name="input_id" id="input_id" disabled="true"/>
+                    <input type="text" name="input_id" id="input_id"/>
                     <section class="d-flex align-items-center">
                     </section>
                 </div>
