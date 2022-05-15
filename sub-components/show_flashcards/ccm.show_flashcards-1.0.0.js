@@ -89,25 +89,6 @@
             this.start = async () => {
                 // Render content
                 render()
-                //get stacks
-                if(this.user.isLoggedIn() === true) {
-                    var username = this.user.getUsername()
-                    const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
-                    const private_stack_name = 'nniazm2s_flashcards_private_stack_' + username
-
-                    const stack_training = await ccm.store({
-                        "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
-                    });
-                    const stack_private = await ccm.store({
-                        "url": 'https://ccm2.inf.h-brs.de', "name": private_stack_name
-                    });
-                    //get data
-                    const data_stack_training = await stack_training.get();
-                    const data_stack_private = await stack_private.get();
-                    // remove last_id element from data, because is not a flashcard
-                    data_stack_training.shift()
-                    data_stack_private.shift()
-                }
                 // stack_collaboration for all
                 const stack_collaboration = await ccm.store({
                     url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
@@ -140,6 +121,23 @@
                         this.element.querySelector('#body-form').appendChild(instance.root);
                     });
                 }else{
+                    var username = this.user.getUsername()
+                    const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
+                    const private_stack_name = 'nniazm2s_flashcards_private_stack_' + username
+                    //get stacks
+                    const stack_training = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
+                    });
+                    const stack_private = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": private_stack_name
+                    });
+                    //get data
+                    const data_stack_training = await stack_training.get();
+                    const data_stack_private = await stack_private.get();
+                    // remove last_id element from data, because is not a flashcard
+                    data_stack_training.shift()
+                    data_stack_private.shift()
+
                     data_stack_private.forEach(async flashcard => {
                         const instance = await this.flashcard.start({
                             flashcardObject: flashcard.value,
