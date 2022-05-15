@@ -110,7 +110,7 @@
                         "entries": [
                             {
                                 "title": title_crate_flashcards,
-                                "content": [ "ccm.proxy", "./../sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js", {"user": this.user}],
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js", {"user": this.user}],
                                 // "actions": [ [ "console.log", "Performed action of menu entry C." ] ]
                             },
                             {
@@ -125,11 +125,11 @@
                             },
                             {
                                 "title": title_edit_training_stack,
-                                "content": [ "ccm.proxy", "./../sub-components/edit_training_stack/ccm.edit_training_stack-1.0.0.js", {"user": this.user}]
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/edit_training_stack/ccm.edit_training_stack-1.0.0.js", {"user": this.user}]
                             },
                             {
                                 "title": title_start_training_stack,
-                                "content": [ "ccm.proxy", "./../sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
                             }
                         ]
                     },
