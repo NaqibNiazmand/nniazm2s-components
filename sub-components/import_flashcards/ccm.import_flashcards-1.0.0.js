@@ -37,6 +37,7 @@
             },
             "user": ["ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js"],
         },
+
         Instance: function () {
             /**
              * shortcut to help functions
@@ -63,14 +64,20 @@
                 this.template.render(this.template.mainContent(this), this.element);
             }
 
-            this.start = async () => {
-                render()
-                const myForm = this.element.querySelector("#import_flashcards_upload_form");
-                const csvFile = this.element.querySelector("#import_csv_file");
+            /**
+             * import flashcards
+             * @type {Function}
+             */
+            const import_flashcards = () => {
+                const import_flashcards_upload_form = this.element.querySelector("#import_flashcards_upload_form");
+                const import_csv_file = this.element.querySelector("#import_csv_file");
                 var flashcardObj = this.flashcardObject;
-                myForm.addEventListener("submit", function (e) {
+                var user = this.user;
+                var element = this.element
+                var lang = this.lang
+                import_flashcards_upload_form.addEventListener("submit", function (e) {
                     e.preventDefault();
-                    const input = csvFile.files[0];
+                    const input = import_csv_file.files[0];
                     const reader = new FileReader();
                     reader.onload = async function (e) {
                         const text = e.target.result;
@@ -86,8 +93,8 @@
                                 flashcardObj.description = question_and_answer[0].substring(0, 1) == '"' ? question_and_answer[0].substring(1, question_and_answer[0].length - 1) : question_and_answer[0]
                                 flashcardObj.translation = question_and_answer[1].substring(0, 1) == '"' ? question_and_answer[1].substring(1, question_and_answer[1].length - 1) : question_and_answer[1]
 
-                                if (this.user !== undefined && this.user.isLoggedIn() === true) {
-                                    var username = this.user.getUsername()
+                                if (user !== undefined && user.isLoggedIn() === true) {
+                                    var username = user.getUsername()
                                     const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
                                     const private_stack_name = 'nniazm2s_flashcards_private_stack_' + username
                                     const stack_training = await ccm.store({
@@ -99,167 +106,95 @@
                                     const stack_collaboration = await ccm.store({
                                         url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
                                     });
-                                    var select_stack_value = this.element.querySelector("#select_stack_id").value
+                                    var select_stack_value = element.querySelector("#select_stack_id").value
                                     if (select_stack_value !== '' || select_stack_value !== undefined) {
                                         let alertMsg;
                                         switch (select_stack_value) {
                                             case "Trainings Stapel":
-                                                if (flashcardObj.stack === "Trainings Stapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGer = await stack_training.get("last_id");
-                                                    const lastIdValueGer = lastIdObjGer.value
-                                                    await stack_training.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGer + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGer;
-                                                    flashcardObj.stack = "Trainings Stapel";
-                                                    await stack_training.set({
-                                                        "key": '' + lastIdValueGer,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGer + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGer + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGer = await stack_training.get("last_id");
+                                                const lastIdValueGer = lastIdObjGer.value
+                                                await stack_training.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGer + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGer;
+                                                flashcardObj.stack = "Trainings Stapel";
+                                                await stack_training.set({
+                                                    "key": '' + lastIdValueGer,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Training stack":
-                                                if (flashcardObj.stack === "Training stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEn = await stack_training.get("last_id");
-                                                    const lastIdValueEn = lastIdObjEn.value
-                                                    await stack_training.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEn + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEn;
-                                                    flashcardObj.stack = "Training stack";
-                                                    await stack_training.set({
-                                                        "key": '' + lastIdValueEn,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEn + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEn + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEn = await stack_training.get("last_id");
+                                                const lastIdValueEn = lastIdObjEn.value
+                                                await stack_training.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEn + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEn;
+                                                flashcardObj.stack = "Training stack";
+                                                await stack_training.set({
+                                                    "key": '' + lastIdValueEn,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Privates Stapel":
-                                                if (flashcardObj.stack === "Privates Stapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGerPri = await stack_private.get("last_id");
-                                                    const lastIdValueGerPri = lastIdObjGerPri.value
-                                                    await stack_private.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGerPri + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGerPri;
-                                                    flashcardObj.stack = "Privates Stapel";
-                                                    await stack_private.set({
-                                                        "key": '' + lastIdValueGerPri,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerPri + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGerPri = await stack_private.get("last_id");
+                                                const lastIdValueGerPri = lastIdObjGerPri.value
+                                                await stack_private.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGerPri + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGerPri;
+                                                flashcardObj.stack = "Privates Stapel";
+                                                await stack_private.set({
+                                                    "key": '' + lastIdValueGerPri,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Private stack":
-                                                if (flashcardObj.stack === "Private stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEnPri = await stack_private.get("last_id");
-                                                    const lastIdValueEnPri = lastIdObjEnPri.value
-                                                    await stack_private.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEnPri + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEnPri;
-                                                    flashcardObj.stack = "Private stack";
-                                                    await stack_private.set({
-                                                        "key": '' + lastIdValueEnPri,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnPri + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEnPri = await stack_private.get("last_id");
+                                                const lastIdValueEnPri = lastIdObjEnPri.value
+                                                await stack_private.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEnPri + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEnPri;
+                                                flashcardObj.stack = "Private stack";
+                                                await stack_private.set({
+                                                    "key": '' + lastIdValueEnPri,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Kollaborationsstapel":
-                                                if (flashcardObj.stack === "Kollaborationsstapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGerKol = await stack_collaboration.get("last_id");
-                                                    const lastIdValueGerKol = lastIdObjGerKol.value
-                                                    await stack_collaboration.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGerKol + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGerKol;
-                                                    flashcardObj.stack = "Kollaborationsstapel";
-                                                    await stack_collaboration.set({
-                                                        "key": '' + lastIdValueGerKol, "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerKol + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGerKol = await stack_collaboration.get("last_id");
+                                                const lastIdValueGerKol = lastIdObjGerKol.value
+                                                await stack_collaboration.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGerKol + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGerKol;
+                                                flashcardObj.stack = "Kollaborationsstapel";
+                                                await stack_collaboration.set({
+                                                    "key": '' + lastIdValueGerKol, "value": flashcardObj
+                                                });
                                                 break;
                                             case "Collaboration stack":
-                                                if (flashcardObj.stack === "Collaboration stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEnKol = await stack_collaboration.get("last_id");
-                                                    const lastIdValueEnKol = lastIdObjEnKol.value
-                                                    await stack_collaboration.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEnKol + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEnKol;
-                                                    flashcardObj.stack = "Kollaborationsstapel";
-                                                    await stack_collaboration.set({
-                                                        "key": '' + lastIdValueEnKol,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnKol + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEnKol = await stack_collaboration.get("last_id");
+                                                const lastIdValueEnKol = lastIdObjEnKol.value
+                                                await stack_collaboration.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEnKol + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEnKol;
+                                                flashcardObj.stack = "Kollaborationsstapel";
+                                                await stack_collaboration.set({
+                                                    "key": '' + lastIdValueEnKol,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             default:
-                                                alertMsg = this.lang.getValue() === "de" ? "Etwas ist beim Stapel Auswahl schiefgelaufen." : "Something went wrong with the stack selection.";
+                                                alertMsg = lang.getValue() === "de" ? "Etwas ist beim Stapel Auswahl schiefgelaufen." : "Something went wrong with the stack selection.";
                                                 console.log(alertMsg);
                                                 alert(alertMsg)
                                         }
@@ -287,8 +222,8 @@
                                 flashcardObj.description = question_and_answer[2].substring(0, 1) == '"' ? question_and_answer[2].substring(1, question_and_answer[2].length - 1) : question_and_answer[2]
                                 flashcardObj.translation = question_and_answer[3].substring(0, 1) == '"' ? question_and_answer[3].substring(1, question_and_answer[3].length - 1) : question_and_answer[3]
 
-                                if (this.user !== undefined && this.user.isLoggedIn() === true) {
-                                    var username = this.user.getUsername()
+                                if (user !== undefined && user.isLoggedIn() === true) {
+                                    var username = user.getUsername()
                                     const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
                                     const private_stack_name = 'nniazm2s_flashcards_private_stack_' + username
                                     const stack_training = await ccm.store({
@@ -300,167 +235,95 @@
                                     const stack_collaboration = await ccm.store({
                                         url: 'https://ccm2.inf.h-brs.de', name: 'nniazm2s_stack_collaboration_store'
                                     });
-                                    var select_stack_value = this.element.querySelector("#select_stack_id").value
+                                    var select_stack_value = element.querySelector("#select_stack_id").value
                                     if (select_stack_value !== '' || select_stack_value !== undefined) {
                                         let alertMsg;
                                         switch (select_stack_value) {
                                             case "Trainings Stapel":
-                                                if (flashcardObj.stack === "Trainings Stapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGer = await stack_training.get("last_id");
-                                                    const lastIdValueGer = lastIdObjGer.value
-                                                    await stack_training.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGer + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGer;
-                                                    flashcardObj.stack = "Trainings Stapel";
-                                                    await stack_training.set({
-                                                        "key": '' + lastIdValueGer,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGer + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGer + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGer = await stack_training.get("last_id");
+                                                const lastIdValueGer = lastIdObjGer.value
+                                                await stack_training.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGer + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGer;
+                                                flashcardObj.stack = "Trainings Stapel";
+                                                await stack_training.set({
+                                                    "key": '' + lastIdValueGer,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Training stack":
-                                                if (flashcardObj.stack === "Training stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEn = await stack_training.get("last_id");
-                                                    const lastIdValueEn = lastIdObjEn.value
-                                                    await stack_training.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEn + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEn;
-                                                    flashcardObj.stack = "Training stack";
-                                                    await stack_training.set({
-                                                        "key": '' + lastIdValueEn,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEn + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEn + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEn = await stack_training.get("last_id");
+                                                const lastIdValueEn = lastIdObjEn.value
+                                                await stack_training.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEn + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEn;
+                                                flashcardObj.stack = "Training stack";
+                                                await stack_training.set({
+                                                    "key": '' + lastIdValueEn,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Privates Stapel":
-                                                if (flashcardObj.stack === "Privates Stapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGerPri = await stack_private.get("last_id");
-                                                    const lastIdValueGerPri = lastIdObjGerPri.value
-                                                    await stack_private.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGerPri + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGerPri;
-                                                    flashcardObj.stack = "Privates Stapel";
-                                                    await stack_private.set({
-                                                        "key": '' + lastIdValueGerPri,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerPri + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGerPri = await stack_private.get("last_id");
+                                                const lastIdValueGerPri = lastIdObjGerPri.value
+                                                await stack_private.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGerPri + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGerPri;
+                                                flashcardObj.stack = "Privates Stapel";
+                                                await stack_private.set({
+                                                    "key": '' + lastIdValueGerPri,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Private stack":
-                                                if (flashcardObj.stack === "Private stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEnPri = await stack_private.get("last_id");
-                                                    const lastIdValueEnPri = lastIdObjEnPri.value
-                                                    await stack_private.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEnPri + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEnPri;
-                                                    flashcardObj.stack = "Private stack";
-                                                    await stack_private.set({
-                                                        "key": '' + lastIdValueEnPri,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnPri + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnPri + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEnPri = await stack_private.get("last_id");
+                                                const lastIdValueEnPri = lastIdObjEnPri.value
+                                                await stack_private.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEnPri + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEnPri;
+                                                flashcardObj.stack = "Private stack";
+                                                await stack_private.set({
+                                                    "key": '' + lastIdValueEnPri,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             case "Kollaborationsstapel":
-                                                if (flashcardObj.stack === "Kollaborationsstapel") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjGerKol = await stack_collaboration.get("last_id");
-                                                    const lastIdValueGerKol = lastIdObjGerKol.value
-                                                    await stack_collaboration.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueGerKol + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueGerKol;
-                                                    flashcardObj.stack = "Kollaborationsstapel";
-                                                    await stack_collaboration.set({
-                                                        "key": '' + lastIdValueGerKol, "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueGerKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueGerKol + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjGerKol = await stack_collaboration.get("last_id");
+                                                const lastIdValueGerKol = lastIdObjGerKol.value
+                                                await stack_collaboration.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueGerKol + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueGerKol;
+                                                flashcardObj.stack = "Kollaborationsstapel";
+                                                await stack_collaboration.set({
+                                                    "key": '' + lastIdValueGerKol, "value": flashcardObj
+                                                });
                                                 break;
                                             case "Collaboration stack":
-                                                if (flashcardObj.stack === "Collaboration stack") {
-                                                    alertMsg = this.lang.getValue() === "de" ? "Diese Lernkarte befindet sich bereits im gewählten Stapel." : "This flashcard is already in the selected stack.";
-                                                    alert(alertMsg)
-                                                } else {
-                                                    const lastIdObjEnKol = await stack_collaboration.get("last_id");
-                                                    const lastIdValueEnKol = lastIdObjEnKol.value
-                                                    await stack_collaboration.set({
-                                                        "key": "last_id",
-                                                        "value": (lastIdValueEnKol + 1)
-                                                    }); // update lastID value
-                                                    flashcardObj.id = lastIdValueEnKol;
-                                                    flashcardObj.stack = "Kollaborationsstapel";
-                                                    await stack_collaboration.set({
-                                                        "key": '' + lastIdValueEnKol,
-                                                        "value": flashcardObj
-                                                    });
-                                                    alertMsg = this.lang.getValue() === "de" ? "Eine Lernkarte mit der ID: " + lastIdValueEnKol + " wurde erstellt." : "A flashcard with the ID: " + lastIdValueEnKol + " was created.";
-                                                    alert(alertMsg)
-                                                    const instance = await this.component.start({
-                                                        flashcardObject: flashcardObj,
-                                                        user: this.user,
-                                                    });
-                                                    this.root.parentElement.appendChild(instance.root);
-                                                }
+                                                const lastIdObjEnKol = await stack_collaboration.get("last_id");
+                                                const lastIdValueEnKol = lastIdObjEnKol.value
+                                                await stack_collaboration.set({
+                                                    "key": "last_id",
+                                                    "value": (lastIdValueEnKol + 1)
+                                                }); // update lastID value
+                                                flashcardObj.id = lastIdValueEnKol;
+                                                flashcardObj.stack = "Kollaborationsstapel";
+                                                await stack_collaboration.set({
+                                                    "key": '' + lastIdValueEnKol,
+                                                    "value": flashcardObj
+                                                });
                                                 break;
                                             default:
-                                                alertMsg = this.lang.getValue() === "de" ? "Etwas ist beim Stapel Auswahl schiefgelaufen." : "Something went wrong with the stack selection.";
+                                                alertMsg = lang.getValue() === "de" ? "Etwas ist beim Stapel Auswahl schiefgelaufen." : "Something went wrong with the stack selection.";
                                                 console.log(alertMsg);
                                                 alert(alertMsg)
                                         }
@@ -487,6 +350,10 @@
                     };
                     reader.readAsText(input);
                 });
+            }
+            this.start = async () => {
+                render()
+                import_flashcards()
             };
         }
     };
