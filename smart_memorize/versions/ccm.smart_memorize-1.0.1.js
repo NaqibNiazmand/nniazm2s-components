@@ -103,6 +103,7 @@
                 var title_show_flashcards = this.lang.getValue() === "de" ? "Lernkarten anzeigen" : "Show flashcards";
                 var title_edit_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel bearbeiten" : "Edit training stack";
                 var title_start_training_stack = this.lang.getValue() === "de" ? "Trainingsstapel starten" : "Start training stack";
+                var title_import_flashcards = this.lang.getValue() === "de" ? "Lernkarten importieren" : "Import flashcards";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
                     "css":  ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css"],
@@ -131,6 +132,10 @@
                             {
                                 "title": title_start_training_stack,
                                 "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
+                            },
+                            {
+                                "title": title_import_flashcards,
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/import_flashcards/ccm-import_flashcards-1.0.0.js", {"user": this.user}]
                             }
                         ]
                     },
