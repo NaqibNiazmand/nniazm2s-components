@@ -135,7 +135,7 @@
                             },
                             {
                                 "title": title_import_flashcards,
-                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/import_flashcards/ccm-import_flashcards-1.0.0.js", {"user": this.user}]
+                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/import_flashcards/ccm.import_flashcards-1.0.0.js", {"user": this.user}]
                             }
                         ]
                     },
