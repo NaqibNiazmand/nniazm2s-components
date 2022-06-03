@@ -82,6 +82,10 @@
                     reader.onload = async function (e) {
                         const text = e.target.result;
                         const csv_file_as_array = text.split(/\r?\n/);
+                        var div_loading = document.createElement('div');
+                        div_loading.classList.add('lds-hourglass');
+                        element.querySelector('#infoBox').innerHTML = ''
+                        element.querySelector('#infoBox').append(div_loading)
                         for (let i = 0; i < csv_file_as_array.length; i++) {
                             const question_and_answer = csv_file_as_array[i].split(',');
                             if (question_and_answer.length === 2) {
@@ -347,6 +351,9 @@
                                 }
                             }
                         }
+                        var successfully_imported = lang.getValue() === "de" ? "Datei wurde Erfolgreich importiert." : "File was successfully imported.";
+                        import_csv_file.value = ''
+                        element.querySelector('#infoBox').innerHTML = '<h1>'+successfully_imported+'</h1>'
                     };
                     reader.readAsText(input);
                 });
