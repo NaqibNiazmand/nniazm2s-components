@@ -7,61 +7,96 @@
 /*
 
 Naqib Niazmand
-https://ccmjs.github.io/akless-components/menu/resources/default.css"
+https://ccmjs.github.io/akless-components/menu/resources/steps.css
 Customised for my needs
 */
 
-#main {
-    font-family: Verdana,Arial,sans-serif;
+
+/**
+ * @overview steps layout of ccmjs-based web component for a menu
+ * @author André Kless <tea.kless@web.de> 2020
+ * @license The MIT License (MIT)
+ */
+
+#element {
+    --color1: #00BFFF;
+    --color2: #00376B;
+    --color3: #914D00;
+    --color4: #E6F4F1;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-#top:not(:empty) {
+#main {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0.5em 1em 0.25em 1em;
+    flex-wrap: wrap;
 }
 
 #entries {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-    -webkit-justify-content: space-between;
-    flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-
-    margin: 0.6em;
-    border: 0.15em solid #DDD;
-    border-radius: 0.6em;
-
-    color: white;
+    white-space: nowrap;
+    padding: 2rem;
 }
 
 .entry {
-    flex-grow: 1;
-    -webkit-flex-grow: 1;
+    position: relative;
+}
 
-    margin: 0.15em;
-    border-radius: 1em;
-    padding: 0.3em 0.6em;
-
-    text-align: center;
-    font-weight: bold;
+.entry > div {
+    display: flex;
+    align-items: center;
+    padding: .5rem .5rem 3rem;
     cursor: pointer;
 }
 
-.entry:not( .selected ) {
-    background-color: black;
+.entry:not(:last-child) > div:after {
+    content: '';
+    width: 2px;
+    background: #ebebeb;
+    height: 3rem;
+    position: absolute;
+    top: 53px;
+    left: 28px;
 }
 
-.entry.selected {
-    background-color: #4473c4;
+.title {
+    color: #999;
+    font-weight: bold;
 }
 
-.entry:hover {
-    background-color: #4CAF50;
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ebebeb;
+    color: #999;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+    /*border: 5px solid #fff;*/
+    z-index: 9;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.entry.active .step-number {
+    background: #4473c4;
+    color: #fff;
+}
+
+.entry.active .title {
+    color: #4473c4;
 }
 
 #content {
-    margin: 1em;
+    min-height: 400px;
+    background: #f8f8f8;
+    padding: 2rem 2rem 5rem;
+}
+
+#buttons {
+    margin-top: -6rem;
+    padding: 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
 }

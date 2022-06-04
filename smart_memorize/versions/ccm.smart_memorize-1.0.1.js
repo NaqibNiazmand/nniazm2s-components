@@ -106,8 +106,12 @@
                 var title_import_flashcards = this.lang.getValue() === "de" ? "Lernkarten importieren" : "Import flashcards";
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
-                    "css":  ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css"],
+                    "css":  ["ccm.load",  "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css"],
+                    "html": [ "ccm.load", "https://ccmjs.github.io/akless-components/menu/resources/steps_templates.html" ],
                     "selected": 1,
+                    "trigger_selected": true,
+                    "keyboard_control": true,
+                    "touch_control": true,
                     "data": {
                         "entries": [
                             {
