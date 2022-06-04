@@ -105,43 +105,25 @@ tr:nth-child(even) {
     align-items: flex-start;
     padding-top: 10px;
 }
-/*!* mobile styles *!*/
-/*@media screen and (min-width: 220px) {*/
-/*    main {*/
-/*        margin: 5px;*/
-/*    }*/
-/*    .flip-card {*/
-/*        width: 200px;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
+/* mobile styles */
+@media screen and (min-width: 220px) {
 
-/*!* small tablet styles*!*/
-/*@media screen and (min-width: 420px) {*/
-/*    .flip-card {*/
-/*        width: 250px;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
+}
 
-/*!* middle tablet styles*!*/
-/*@media screen and (min-width: 620px) {*/
-/*    .flip-card {*/
-/*        width: 400px;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
-/*!* large tablets and laptops styles*!*/
-/*@media screen and (min-width: 960px) {*/
-/*    .flip-card {*/
-/*        width: 700px;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
-/*!* desktops styles*!*/
-/*@media screen and (min-width: 1200px) {*/
-/*    .flip-card {*/
-/*        width: 750px;*/
-/*        height: 200px;*/
-/*    }*/
-/*}*/
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+
+}
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
+}
