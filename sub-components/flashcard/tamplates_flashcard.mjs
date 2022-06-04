@@ -96,39 +96,6 @@ export function mainContent(app, events, flashcardObject) {
         <div id="represent_flashcard_id">
             <section class="d-flex align-items-center">
             </section>
-            <style>
-                .button {
-                    background-color: #4CAF50; /* Green */
-                    border: none;
-                    color: white;
-                    padding: 16px 32px;
-                    text-align: center;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 20pt;
-                    margin: 20px;
-                    transition-duration: 0.4s;
-                    cursor: pointer;
-                    width: 100%;
-                }
-
-                .button1 {
-                    background-color: white;
-                    color: black;
-                    border: 2px solid #4CAF50;
-                    width: 100%;
-                    font-size: 20pt;
-                    margin: 20px;
-
-                }
-
-                .button1:hover {
-                    background-color: #4CAF50;
-                    color: white;
-                    font-size: 20pt;
-                    margin: 20px;
-                }
-            </style>
             <main>
                 <table>
                     <tr>
@@ -155,7 +122,7 @@ export function mainContent(app, events, flashcardObject) {
                     </div>
                 </div>
                 <div id="input">
-                    <button id="flashcard_remove_btn"  data-lang="flashcard_remove_btn" class="button1" @click="${events.flashcard_remove_button}" >${app.text.flashcard_remove_btn}</button>
+                    <button id="flashcard_remove_btn"  data-lang="flashcard_remove_btn" class="glow-on-hover" @click="${events.flashcard_remove_button}" >${app.text.flashcard_remove_btn}</button>
                     <span id="flashcard_lang"></span>
                 </div>
             </main>
