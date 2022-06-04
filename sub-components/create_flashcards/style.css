@@ -1,83 +1,239 @@
+/*mobile styles smaller than 220px*/
+#create_flashcard_body_id{
+    text-align: center;
+    font-size: 16pt;
+}
 
 #create_flashcards_id {
-    display: flex;
-    text-align: center;
-    border: solid 1px black;
-    width: fit-content;
+    display:inline-block;
+    border: solid 3px #4473c4;
     padding: 10px;
+    box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.6);
+    width: fit-content;
 }
-
-#header-form-id {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    white-space: nowrap;
-    border-bottom: solid 1px black;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#header-form-id_title{
-    font-size: 30pt;
-}
-
-#header-form-id > section:first-child {
-    display: flex;
-    align-items: center;
-    padding: 0.5em 0;
-}
-
-#header-form-id > section:first-child > span {
-    padding-right: 1em;
-}
-
-#header-form-id > section:last-child,
-#header-form-id > section:last-child > * {
-    padding-left: 1em;
-}
-
-#header-form-id + article {
-    margin-bottom: 2em;
-}
-
 
 #body-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     border-bottom: solid 1px black;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.info-text {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#footer-form {
-    margin-top: 10px;
-}
-
-.button {
-    background-color: #4CAF50; /* Green */
+/*glow-on-hover button from https://webdeasy.de/top-css-buttons/*/
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
     border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
+    outline: none;
+    color: #fff;
+    background: #111;
     cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 20px;
 }
 
-.button1 {
-    background-color: white;
-    color: black;
-    border: 2px solid #4CAF50;
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 20px;
 }
 
-.button1:hover {
-    background-color: #4CAF50;
-    color: white;
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 20px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* mobile styles */
+@media screen and (min-width: 220px) {
+
+}
+
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+
+    #header-form-id {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: solid 1px black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    #header-form-id_title{
+        font-size: 16pt;
+    }
+
+    #header-form-id > section:first-child {
+        display: flex;
+        align-items: center;
+        padding: 0.5em 0;
+    }
+
+    #header-form-id > section:first-child > span {
+        padding-right: 1em;
+    }
+
+    #header-form-id > section:last-child,
+    #header-form-id > section:last-child > * {
+        padding-left: 1em;
+    }
+
+    #header-form-id + article {
+        margin-bottom: 2em;
+    }
+
+    #create_flashcard_body_id{
+        display: flex;
+        text-align: center;
+        font-size: 12pt;
+        flex-direction: row;
+    }
+
+    #create_flashcards_id {
+        display: flex;
+        flex-direction: row;
+        border: solid 3px #4473c4;
+        padding: 10px;
+        box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    #body-form {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        border-bottom: solid 1px black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #label_topic{
+        grid-column: 3/4;
+        grid-row: 1;
+        justify-self: right;
+        justify-content: right;
+    }
+    #input_topic_id{
+        grid-column: 4/5;
+        grid-row: 1;
+        justify-self: left;
+        justify-content: left;
+    }
+    #label_name{
+        grid-column: 5/6;
+        grid-row: 1;
+        justify-self: right;
+        justify-content: right;
+    }
+    #input_name_id{
+        grid-column: 6/7;
+        grid-row: 1;
+        justify-self: left;
+        justify-content: left;
+    }
+    #label_stack{
+        grid-column: 7/8;
+        grid-row: 1;
+        justify-self: right;
+        justify-content: right;
+    }
+    #select_stack_id{
+        grid-column: 8/9;
+        grid-row: 1;
+        justify-self: left;
+        justify-content: left;
+    }
+    #label_description{
+        grid-column: 2/11;
+        grid-row: 2;
+    }
+    #card_description_id{
+        grid-column: 2/11;
+        grid-row: 3;
+    }
+    #info_text_description_id{
+        grid-column: 2/11;
+        grid-row: 4;
+    }
+    #label_translation{
+        grid-column: 2/11;
+        grid-row: 5;
+    }
+    #card_translation_id{
+        grid-column: 2/11;
+        grid-row: 6;
+    }
+    #info_text_translation_id{
+        grid-column: 2/11;
+        grid-row: 7;
+    }
+    #info_text_required_fields_id{
+        grid-column: 2/11;
+        grid-row: 8;
+    }
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+    #header-form-id_title{
+        font-size: 20pt;
+    }
+    #create_flashcard_body_id{
+        text-align: center;
+        font-size: 18pt;
+    }
+    #select_stack_id {
+        font-size: 18pt;
+    }
+    .glow-on-hover {
+        font-size: 16pt;
+     }
+}
+
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
 }
