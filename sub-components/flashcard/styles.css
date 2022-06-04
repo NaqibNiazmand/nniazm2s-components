@@ -1,23 +1,29 @@
-html, body, main {
-    height: 100%;
+/*mobile styles smaller than 220px*/
+#represent_flashcard_id{
+    display: flex;
+    margin: 2px;
+    max-width: 100%;
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
 }
-
 main {
-    display:  flex;
+    display: flex;
     flex-direction: column;
-    width: fit-content;
     border: solid 1px gray;
-    justify-content: left;
-    align-items: flex-start;
-    padding-top: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .flip-card {
-    margin: 20px;
     background-color: transparent;
-    width: 300px;
-    height: 200px;
-    perspective: 1000px;
+    width: 100%;
+    height: 220px;
+    perspective: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .flip-card-inner {
@@ -33,7 +39,8 @@ main {
     transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -43,7 +50,7 @@ main {
 
 .flip-card-front,
 .flip-card-back {
-    border: 3px solid black;
+    border: 2px solid black;
     border-radius: 20px;
     background-color: gold;
     color: black;
@@ -59,13 +66,13 @@ main {
     background-color: silver;
 }
 
-#flashcard_data_front{
+#flashcard_data_front {
     overflow-wrap: break-word;
     overflow-y: auto;
     height: 100%;
 }
 
-#flashcard_data_back{
+#flashcard_data_back {
     overflow-wrap: break-word;
     overflow-y: auto;
     height: 100%;
@@ -73,15 +80,50 @@ main {
 
 table {
     font-family: arial, sans-serif;
-    width: 100%;
+    width: fit-content;
+    text-align: center;
+
 }
 
-td, th {
+td,
+th {
     border: 1px solid black;
-    text-align: left;
-    padding: 8px;
+    text-align: center;
+    width: fit-content;
 }
 
 tr:nth-child(even) {
     background-color: gold;
+}
+
+#left_menu_topic_and_next_button{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    border: solid 1px gray;
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 10px;
+}
+/* mobile styles */
+@media screen and (min-width: 220px) {
+
+}
+
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+
+}
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
 }

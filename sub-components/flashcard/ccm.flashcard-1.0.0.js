@@ -273,7 +273,6 @@
             this.start = async () => {
                 render()
                 this.lang.translate();
-                this.lang && $.append(this.element.querySelector('#flashcard_lang'), this.lang.root);
             };
         }
     };
