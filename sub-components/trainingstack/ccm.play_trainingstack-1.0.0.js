@@ -11,8 +11,8 @@
         config: {
             css: [
                 "ccm.load",
-                //"https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/style.css",
-                "./../sub-components/trainingstack/style.css",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/style.css",
+                // "./../sub-components/trainingstack/style.css",
                 // "./style.css"
             ],
             helper: [
@@ -35,7 +35,8 @@
             ],
             blank_flashcard: [
                 "ccm.component",
-                "./../sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
+                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
+                // "./../sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
                 // "./../blank_flashcard/ccm.blank_flashcard-1.0.0.js",
             ],
             "user": [ 'ccm.start', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
@@ -132,6 +133,7 @@
 
             this.start = async () => {
                 render();
+                this.lang.translate();
                 this.element.querySelector("#start_training_stack").innerHTML = ``;
                 let stack_training;
                 if(this.user.isLoggedIn() === true) {
