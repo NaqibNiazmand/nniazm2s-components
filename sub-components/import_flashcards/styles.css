@@ -1,4 +1,11 @@
+/*mobile styles smaller than 220px*/
+#import_flashcard_body_id {
+    text-align: center;
+    font-size: 16pt;
+}
+
 #import_flashcards_upload_form {
+    display:inline-block;
     border: solid 2px blue;
     width: fit-content;
     padding: 20px;
@@ -109,3 +116,30 @@
 }
 /* html für spinner: <div class="lds-hourglass"></div>*/
 
+/* mobile styles */
+@media screen and (min-width: 220px) {
+
+}
+
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+    #import_flashcard_body_id, #select_stack_id, form, #import_flashcards_upload_form{
+        font-size: 16pt;
+    }
+
+}
+
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
+}
