@@ -9,7 +9,12 @@
         version: [1, 0, 0],
         ccm: "https://ccmjs.github.io/ccm/versions/ccm-27.3.1.js",
         config: {
-            css: ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/style.css"],
+            css: [
+                "ccm.load",
+                //"https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/style.css",
+                "./../sub-components/trainingstack/style.css",
+                // "./style.css"
+            ],
             helper: [
                 "ccm.load",
                 "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs",
@@ -30,7 +35,8 @@
             ],
             blank_flashcard: [
                 "ccm.component",
-                "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
+                "./../sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
+                // "./../blank_flashcard/ccm.blank_flashcard-1.0.0.js",
             ],
             "user": [ 'ccm.start', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
             "training_stack_cards": [{

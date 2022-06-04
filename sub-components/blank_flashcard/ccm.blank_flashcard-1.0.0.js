@@ -12,6 +12,8 @@
             css: [
                 "ccm.load",
                 "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/styles.css",
+                // "./../sub-components/blank_flashcard/styles.css"
+                // "./../blank_flashcard/styles.css"
                 // "./styles.css"
             ],
             lang: [
@@ -36,7 +38,8 @@
                 "ccm.load",
                 "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/templates_blank_flashcard.mjs",
             ],
-            // "template": ["ccm.load", "./tamplates_flashcard.mjs"],
+            // "template": ["ccm.load", "./../sub-components/blank_flashcard/templates_blank_flashcard.mjs"],
+            // "template": ["ccm.load", "./templates_blank_flashcard.mjs"],
             flashcardObject: {
                 id: "0",
                 topic: "topic",
@@ -63,18 +66,13 @@
                 $.use(this.ccm);
             };
             /**
-             * contains all event handlers
-             * @type {Object.<string,Function>}
-             */
-            const events = {};
-            /**
              * renders/updates app content in webpage area
              * @param {Object} flashcardObject - flashcardObject parameter
              * @type {Function}
              */
             const render = () => {
                 this.template.render(
-                    this.template.mainContent(this, events, this.flashcardObject),
+                    this.template.mainContent(this, this.flashcardObject),
                     this.element
                 );
             };
@@ -82,11 +80,6 @@
             this.start = async () => {
                 render();
                 this.lang.translate();
-                this.lang &&
-                $.append(
-                    this.element.querySelector("#flashcard_lang"),
-                    this.lang.root
-                );
             };
         },
     };

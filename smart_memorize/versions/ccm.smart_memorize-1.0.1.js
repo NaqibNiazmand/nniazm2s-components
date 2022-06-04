@@ -131,7 +131,7 @@
                             },
                             {
                                 "title": title_start_training_stack,
-                                "content": [ "ccm.proxy", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
+                                "content": [ "ccm.proxy", "./../sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js", {"user": this.user}]
                             },
                             {
                                 "title": title_import_flashcards,

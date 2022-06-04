@@ -1,75 +1,18 @@
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.flip-card {
-    margin: 20px;
-    background-color: transparent;
-    width: 300px;
-    height: 200px;
-    perspective: 1000px;
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-.flip-card-front,
-.flip-card-back {
-    border: 3px solid black;
-    border-radius: 20px;
-    background-color: gold;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
-    font-weight: bold;
-}
-
-.flip-card-back {
-    transform: rotateY(180deg);
-    background-color: silver;
-}
-
+/*mobile styles smaller than 220px*/
 #body-form {
     display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: 100%;
-    overflow-x: auto;
-    overflow-wrap: break-word;
-    overflow-y: auto;
+    width: 100%;
     height: 100%;
 }
 
 #space_right{
-    margin-right: 20px;
+    margin-right: 5px;
 }
 
 #space_top{
@@ -79,9 +22,61 @@ main {
 #left_menu_topic_and_next_button{
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 100%;
     border: solid 1px gray;
     justify-content: left;
     align-items: flex-start;
     padding-top: 10px;
+}
+#menu_left_enter_translation_input{
+    width: 95%;
+}
+
+/* mobile styles */
+@media screen and (min-width: 220px) {
+
+}
+
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+    #body-form {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-content: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #start_training_stack{
+        width: 60%;
+    }
+
+    #left_menu_topic_and_next_button{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        border: solid 1px gray;
+        justify-content: left;
+        align-items: flex-start;
+        padding-top: 10px;
+    }
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+
+}
+
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
 }

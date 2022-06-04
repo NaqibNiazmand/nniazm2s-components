@@ -9,7 +9,7 @@ export {render};
  * @param {Object} app - ccmjs-based app instance for commentary
  * @returns {TemplateResult} main HTML template
  */
-export function mainContent(app, events, front, back) {
+export function mainContent(app, events) {
     return html`
         <div id="body-form">
             <div id="left_menu_topic_and_next_button">
@@ -17,7 +17,7 @@ export function mainContent(app, events, front, back) {
                 <select id="select-topics"></select>
                 <label id="space_top"></label>
                 <label data-lang="menu_left_check_translation">${app.text.menu_left_enter_translation}:</label>
-                <input type="text" name="menu_left_enter_translation_name" id="menu_left_enter_translation_input" />
+                <input type="text" name="menu_left_enter_translation_name" id="menu_left_enter_translation_input"/>
                 <style>
                     .button {
                         background-color: #4CAF50; /* Green */

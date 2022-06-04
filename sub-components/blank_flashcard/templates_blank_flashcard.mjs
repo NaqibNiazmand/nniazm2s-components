@@ -9,7 +9,7 @@ export { render };
  * @param {Object} app - ccmjs-based app instance for commentary
  * @returns {TemplateResult} main HTML template
  */
-export function mainContent(app, events, flashcardObject) {
+export function mainContent(app, flashcardObject) {
     return html`
     <div id="represent_flashcard_id">
       <section class="d-flex align-items-center"></section>
