@@ -84,8 +84,8 @@
                     nextCard();
                 },
                 menu_left_check_translation_button: async () => {
-                    const to_check_translation_value = this.element.querySelector('#menu_left_enter_translation_input').value;
-                    var correct = (current_card.translation === to_check_translation_value);
+                    const to_check_translation_value = this.element.querySelector('#menu_left_enter_translation_input').value.replace(/ /g,'');
+                    var correct = (current_card.translation.replace(/ /g,'') === to_check_translation_value);
                     blank_flashcard_instance.element.querySelector( '.flip-card-front' ).style.backgroundColor = correct ? 'lime' : 'red';
                 },
             };
