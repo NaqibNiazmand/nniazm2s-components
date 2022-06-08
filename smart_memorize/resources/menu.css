@@ -18,11 +18,11 @@ Customised for my needs
  * @license The MIT License (MIT)
  */
 #element {
-    --color1: #00BFFF;
+    --color1: #4473c4;
     --color2: #00376B;
     --color3: #914D00;
     --color4: #E6F4F1;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #main {
@@ -79,12 +79,12 @@ Customised for my needs
 }
 
 .entry.active .step-number {
-    background: #4966b1;
+    background: #4473c4;
     color: #fff;
 }
 
 .entry.active .title {
-    color: #4966b1;
+    color: #4473c4;
 }
 
 #content {
@@ -98,4 +98,27 @@ Customised for my needs
     padding: 2rem 2rem;
     display: flex;
     justify-content: space-between;
+}
+
+/* mobile styles */
+@media screen and (min-width: 220px) {
+
+}
+
+/* small tablet styles*/
+@media screen and (min-width: 420px) {
+
+}
+
+/* middle tablet styles*/
+@media screen and (min-width: 620px) {
+
+}
+/* large tablets and laptops styles*/
+@media screen and (min-width: 960px) {
+
+}
+/* desktops styles*/
+@media screen and (min-width: 1200px) {
+
 }
