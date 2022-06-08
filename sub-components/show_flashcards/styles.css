@@ -1,11 +1,13 @@
 html, body{
 width: fit-content;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #show_flashcards_id {
     display: inline-block;
     border: solid 1px black;
     padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #header-form-id {

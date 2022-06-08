@@ -18,6 +18,11 @@ export function mainContent(app) {
             <section></section>
             <section class="d-flex align-items-center"></section>
         </header>
+        <style>
+            main{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        </style>
         <main>
             <body>
             <p data-lang="welcome_text">${app.text.welcome_text}</p>

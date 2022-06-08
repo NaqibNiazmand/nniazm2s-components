@@ -32,6 +32,9 @@ export function register_button(app, events) {
                     background-color: #4CAF50;
                     color: white;
                 }
+                main{
+                    font-family: Arial, Helvetica, sans-serif;
+                }
             </style>
             <section class="d-flex align-items-center">
                 <div id="id_for_reg_btn" ></div>

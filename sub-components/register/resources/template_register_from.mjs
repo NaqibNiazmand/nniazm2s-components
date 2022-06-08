@@ -42,6 +42,9 @@ export function register_form(app, events) {
                     background-color: #4CAF50;
                     color: white;
                 }
+                main{
+                    font-family: Arial, Helvetica, sans-serif;
+                }
             </style>
             <form id="regForm">
                 <label data-lang="registration_form">${app.text.registration_form}</label>
