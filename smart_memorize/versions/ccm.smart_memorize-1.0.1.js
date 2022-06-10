@@ -107,7 +107,7 @@
                 this.menu && this.menu.start({
                     root: this.element.querySelector('main'),
                     "css": [ "ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css" ],
-                    "html": [ "ccm.load", "https://ccmjs.github.io/akless-components/menu/resources/steps_templates.html" ],
+                    "html": [ "ccm.load","https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu_buttons_next_prev.html" ],
                     "selected": 1,
                     "keyboard_control": false,
                     "touch_control": false,
