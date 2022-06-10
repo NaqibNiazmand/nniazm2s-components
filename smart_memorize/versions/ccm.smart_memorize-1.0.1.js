@@ -109,9 +109,8 @@
                     "css": [ "ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/smart_memorize/resources/menu.css" ],
                     "html": [ "ccm.load", "https://ccmjs.github.io/akless-components/menu/resources/steps_templates.html" ],
                     "selected": 1,
-                    "trigger_selected": true,
                     "keyboard_control": false,
-                    "touch_control": true,
+                    "touch_control": false,
                     "data": {
                         "entries": [
                             {
