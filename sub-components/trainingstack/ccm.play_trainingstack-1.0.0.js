@@ -33,13 +33,15 @@
                 "ccm.load",
                 "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/templates_play_trainingstack.mjs",
             ],
+            // template: ["ccm.load", "./../trainingstack/templates_play_trainingstack.mjs"],
+            // template: ["ccm.load", "./templates_play_trainingstack.mjs"],
             blank_flashcard: [
                 "ccm.component",
                 "https://naqibniazmand.github.io/nniazm2s-components/sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
                 // "./../sub-components/blank_flashcard/ccm.blank_flashcard-1.0.0.js",
                 // "./../blank_flashcard/ccm.blank_flashcard-1.0.0.js",
             ],
-            "user": [ 'ccm.start', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
+            "user": ['ccm.start', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js'],
             "training_stack_cards": [{
                 "id": "0",
                 "topic": "topic1",
@@ -55,6 +57,7 @@
                 "description": "default  description2",
                 "translation": "default translation2"
             }],
+            "is_vocabulary_sets": false,
         },
         Instance: function () {
             /**
@@ -81,12 +84,17 @@
              */
             const events = {
                 next_button: async () => {
-                    nextCard();
+                    if(this.is_vocabulary_sets === false){
+                        nextCard();
+                    }else {
+                        nextCardVocabulary()
+                    }
                 },
                 menu_left_check_translation_button: async () => {
-                    const to_check_translation_value = this.element.querySelector('#menu_left_enter_translation_input').value.replace(/ /g,'');
-                    var correct = (current_card.translation.replace(/ /g,'') === to_check_translation_value);
-                    blank_flashcard_instance.element.querySelector( '.flip-card-front' ).style.backgroundColor = correct ? 'lime' : 'red';
+                    const to_check_translation_value = this.element.querySelector('#menu_left_enter_translation_input').value !== '' ? this.element.querySelector('#menu_left_enter_translation_input').value.replace(/ /g, '') : ''
+                    const to_check_translation_value_current_card = current_card.translation !== '' ? current_card.translation.replace(/ /g, '') : ''
+                    var correct = (to_check_translation_value_current_card === to_check_translation_value);
+                    blank_flashcard_instance.element.querySelector('.flip-card-front').style.backgroundColor = correct ? 'lime' : 'red';
                 },
             };
             /**
@@ -115,7 +123,6 @@
                 }
                 console.log(
                     data[index].then(async (card) => {
-                        console.log("card",card);
                         current_card = card;
                         const instance = await this.blank_flashcard.start({
                             flashcardObject: card,
@@ -131,100 +138,130 @@
                 );
             };
 
+            const nextCardVocabulary = async () => {
+                const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + 0;
+                const create_vocabulary_sets = await ccm.store({
+                    "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
+                });
+                var stack_data_1 = []
+                for (let i = 0; i < 2; i++) {
+                    var obj = await create_vocabulary_sets.get("V_" + i)
+                    stack_data_1.push(obj)
+                }
+                var index = this.element.index;
+                if (index >= stack_data_1.length - 1) {
+                    this.element.index = 0;
+                } else {
+                    this.element.index = this.element.index + 1;
+                }
+                const instance = await this.blank_flashcard.start({
+                    flashcardObject: stack_data_1[index].value,
+                });
+                blank_flashcard_instance = instance
+                current_card = stack_data_1[index].value;
+                this.element.querySelector(
+                    "#start_training_stack"
+                ).innerHTML = ``;
+                this.element
+                    .querySelector("#start_training_stack")
+                    .appendChild(instance.root);
+            };
             this.start = async () => {
                 render();
                 this.lang.translate();
                 this.element.querySelector("#start_training_stack").innerHTML = ``;
                 let stack_training;
-                if(this.user.isLoggedIn() === true) {
+                if (this.user.isLoggedIn() === true) {
                     var username = this.user.getUsername()
                     const training_stack_name = 'nniazm2s_flashcards_training_stack_' + username
                     stack_training = await ccm.store({
                         "url": 'https://ccm2.inf.h-brs.de', "name": training_stack_name
                     });
                 }
-
                 let data_stack_training = [];
                 let topics = [];
-                if(this.user.isLoggedIn() === true) {
+                if (this.user.isLoggedIn() === true) {
                     data_stack_training = await stack_training.get();
                     data_stack_training.shift();
                     topics = Array.from(
                         new Set(data_stack_training.map((item) => item.value.topic))
                     );
-                }else {
+                } else {
                     data_stack_training = this.training_stack_cards;
                     topics = Array.from(
                         new Set(data_stack_training.map((item) => item.topic))
                     );
                 }
-                topics.forEach(async (topic) => {
-                    var option = document.createElement("option");
-                    option.value = topic;
-                    option.innerText = topic;
-                    this.element.querySelector("#select-topics").appendChild(option);
-                });
-
-                let ele = this.element;
-                let $ = this;
-                let user = this.user;
-                // When starting training stack
-                var selectedTopic = this.element.querySelector("#select-topics").value
-                if (selectedTopic !== "") {
-                    this.element.querySelector("#start_training_stack").innerHTML = ``;
-                    this.element.index = 0;
-
-                    if(user.isLoggedIn() === true) {
-                        const stack_data = await data_stack_training
-                            .filter((stack) => stack.value.topic === selectedTopic)
-                            .map(async (flashcard) => {
-                                const value = await flashcard.value;
-                                return value;
-                            });
-                        console.log(stack_data);
-                        $.mystore = stack_data;
-                    }else {
-                        const stack_data = await data_stack_training
-                            .filter((stack) => stack.topic === selectedTopic)
-                            .map(async (flashcard) => {
-                                const value = await flashcard;
-                                return value;
-                            });
-                        console.log(stack_data);
-                        $.mystore = stack_data;
-                    }
-
-                    await nextCard();
-                }
-                // When the topic is changed
-                this.element
-                    .querySelector("#select-topics")
-                    .addEventListener("change", async function () {
-                        if (this.value !== "") {
-                            ele.querySelector("#start_training_stack").innerHTML = ``;
-                            ele.index = 0;
-                            if(user.isLoggedIn() === true) {
-                                const stack_data = await data_stack_training
-                                    .filter((stack) => stack.value.topic === this.value)
-                                    .map(async (flashcard) => {
-                                        const value = await flashcard.value;
-                                        return value;
-                                    });
-                                console.log(stack_data);
-                                $.mystore = stack_data;
-                            }else{
-                                const stack_data = await data_stack_training
-                                    .filter((stack) => stack.topic === this.value)
-                                    .map(async (flashcard) => {
-                                        const value = await flashcard;
-                                        return value;
-                                    });
-                                console.log(stack_data);
-                                $.mystore = stack_data;
-                            }
-                            await nextCard();
-                        }
+                if (this.is_vocabulary_sets === false) {
+                    topics.forEach(async (topic) => {
+                        var option = document.createElement("option");
+                        option.value = topic;
+                        option.innerText = topic;
+                        this.element.querySelector("#select-topics").appendChild(option);
                     });
+                    let ele = this.element;
+                    let $ = this;
+                    let user = this.user;
+                    // When starting training stack
+                    var selectedTopic = this.element.querySelector("#select-topics").value
+                    if (selectedTopic !== "") {
+                        this.element.querySelector("#start_training_stack").innerHTML = ``;
+                        this.element.index = 0;
+
+                        if (user.isLoggedIn() === true) {
+                            const stack_data = await data_stack_training
+                                .filter((stack) => stack.value.topic === selectedTopic)
+                                .map(async (flashcard) => {
+                                    const value = await flashcard.value;
+                                    return value;
+                                });
+                            console.log(stack_data);
+                            $.mystore = stack_data;
+                        } else {
+                            const stack_data = await data_stack_training
+                                .filter((stack) => stack.topic === selectedTopic)
+                                .map(async (flashcard) => {
+                                    const value = await flashcard;
+                                    return value;
+                                });
+                            console.log(stack_data);
+                            $.mystore = stack_data;
+                        }
+
+                        await nextCard();
+                    }
+                    // When the topic is changed
+                    this.element
+                        .querySelector("#select-topics")
+                        .addEventListener("change", async function () {
+                            if (this.value !== "") {
+                                ele.querySelector("#start_training_stack").innerHTML = ``;
+                                ele.index = 0;
+                                if (user.isLoggedIn() === true) {
+                                    const stack_data = await data_stack_training
+                                        .filter((stack) => stack.value.topic === this.value)
+                                        .map(async (flashcard) => {
+                                            const value = await flashcard.value;
+                                            return value;
+                                        });
+                                    console.log(stack_data);
+                                    $.mystore = stack_data;
+                                } else {
+                                    const stack_data = await data_stack_training
+                                        .filter((stack) => stack.topic === this.value)
+                                        .map(async (flashcard) => {
+                                            const value = await flashcard;
+                                            return value;
+                                        });
+                                    console.log(stack_data);
+                                    $.mystore = stack_data;
+                                }
+                                await nextCard();
+                            }
+                        });
+                } else {
+                    nextCardVocabulary()
+                }
             };
         },
     };
@@ -238,7 +275,7 @@
     (b = window.ccm && window.ccm.components[component.name]) &&
     b.ccm &&
     (component.ccm = b.ccm);
-    "string" === typeof component.ccm && (component.ccm = { url: component.ccm });
+    "string" === typeof component.ccm && (component.ccm = {url: component.ccm});
     let c = (component.ccm.url.match(
         /(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/
     ) || [""])[0];

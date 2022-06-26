@@ -55,7 +55,7 @@ export function mainContent(app, events, flashcardObject) {
             </main>
         </div>
     `;
-    }else if(app.user.isLoggedIn() === false && app.button !== "flashcard_remove_button"){
+    }else if(app.user.isLoggedIn() === false && app.button !== "flashcard_remove_button" && app.is_vocabulary_sets === false){
         return html`
         <div id="represent_flashcard_id">
             <section class="d-flex align-items-center">
@@ -70,6 +70,41 @@ export function mainContent(app, events, flashcardObject) {
                     </tr>
                     <tr>
                         <td>${flashcardObject.stack}</td>
+                        <td>${flashcardObject.topic}</td>
+                        <td>${flashcardObject.name}</td>
+                        <td>${flashcardObject.id}</td>
+                    </tr>
+                </table>
+                <div class="card flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p id="flashcard_data_front">${flashcardObject.description}</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p id="flashcard_data_back">${flashcardObject.translation}</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="input">
+                    <span id="flashcard_lang"></span>
+                </div>
+            </main>
+        </div>
+    `;
+    }else if(app.user.isLoggedIn() === false && app.is_vocabulary_sets === true){
+        console.log("is_vocabulary_sets true" )
+        return html`
+        <div id="represent_flashcard_id">
+            <section class="d-flex align-items-center">
+            </section>
+            <main>
+                <table>
+                    <tr>
+                        <th data-lang="vocabulary_set">${app.text.vocabulary_set} </th>
+                        <th data-lang="flashcard_name">${app.text.flashcard_name} </th>
+                        <th data-lang="flashcard_id">${app.text.flashcard_id} </th>
+                    </tr>
+                    <tr>
                         <td>${flashcardObject.topic}</td>
                         <td>${flashcardObject.name}</td>
                         <td>${flashcardObject.id}</td>

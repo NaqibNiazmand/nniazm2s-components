@@ -10,6 +10,7 @@
  */
 export const de = {
     "flashcard_stack" : "Stapel",
+    "vocabulary_set" : "Vokabelsets",
     "flashcard_topic" : "Thema",
     "flashcard_name" : "Name",
     "flashcard_id" : "ID",
@@ -26,6 +27,7 @@ export const de = {
  */
 export const en = {
     "flashcard_stack" : "Stack",
+    "vocabulary_set" : "Vocabulary sets",
     "flashcard_topic" : "Topic",
     "flashcard_name" : "Name",
     "flashcard_id" : "ID",

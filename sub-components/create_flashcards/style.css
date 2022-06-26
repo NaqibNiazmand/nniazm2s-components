@@ -176,6 +176,18 @@
         justify-self: right;
         justify-content: right;
     }
+    #select_topic_id{
+        grid-column: 8/9;
+        grid-row: 1;
+        justify-self: left;
+        justify-content: left;
+    }
+    #label_topic_id{
+        grid-column: 7/8;
+        grid-row: 1;
+        justify-self: right;
+        justify-content: right;
+    }
     #select_stack_id{
         grid-column: 8/9;
         grid-row: 1;
@@ -222,6 +234,9 @@
         font-size: 18pt;
     }
     #select_stack_id {
+        font-size: 18pt;
+    }
+    #label_topic_id{
         font-size: 18pt;
     }
     .glow-on-hover {
