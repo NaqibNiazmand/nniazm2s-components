@@ -35,9 +35,9 @@
             // }],
             // "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
             "text": ["ccm.load", "./resources.mjs#de"],
-            "flashcard": ["ccm.component", "./../flashcard/ccm.flashcard-1.0.0.js"],
-            "create_flashcard": ["ccm.component", "./../create_flashcards/ccm.create_flashcards-1.0.0.js"],
-            "play_trainingstack": ["ccm.component", "./../trainingstack/ccm.play_trainingstack-1.0.0.js"],
+            "flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/ccm.flashcard-1.0.0.js"],
+            "create_flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js"],
+            "play_trainingstack": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js"],
         },
         Instance: function () {
             /**
@@ -65,27 +65,42 @@
                  */
                 create_vocabulary_sets_button: async () => {
                     const vocabulary_sets_input_value = this.element.querySelector('#new_vocabulary_sets_input_id').value.replace(/\s/g,'')
-                    if(vocabulary_sets_input_value.length !== ""){
-                        const vocabulary_sets_id = await ccm.store({
-                            "url": 'https://ccm2.inf.h-brs.de', "name": "nniazm2s_vocabulary_sets_id"
+                    const vocabulary_sets_id = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": "nniazm2s_vocabulary_sets_id"
+                    });
+                    var last_id = await vocabulary_sets_id.get("last_id");
+                    // get existing themes
+                    var existing_themes = []
+                    for (let i = 0; i < last_id.value; i++) {
+                        const vocabulary_sets_name_i = "nniazm2s_create_vocabulary_sets_" + i;
+                        const create_vocabulary_sets_i = await ccm.store({
+                            "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name_i
                         });
-                        var last_id = await vocabulary_sets_id.get("last_id");
-                        var last_id_value_update = last_id.value + 1;
-                        await vocabulary_sets_id.set({"key": "last_id", "value": last_id_value_update});
+                        var topic = await create_vocabulary_sets_i.get(i+'')
+                        if(topic !== null){
+                            existing_themes.push(topic.value)
+                        }
+                    }
+                    if(vocabulary_sets_input_value.length !== 0){
+                        if(existing_themes.includes(vocabulary_sets_input_value)){
+                            alert("Vokabelsets bereits vorhanden! Bitte eine andere Bezeichnung angeben.");
+                        }else {
+                            var last_id_value_update = last_id.value + 1;
+                            await vocabulary_sets_id.set({"key": "last_id", "value": last_id_value_update});
 
-                        const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + last_id.value;
-                        const create_vocabulary_sets = await ccm.store({
-                            "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
-                        });
-                        await create_vocabulary_sets.set({"key": last_id.value+"", "value": vocabulary_sets_input_value});
-                        await create_vocabulary_sets.set({"key": "last_id_v", "value": 0});
+                            const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + last_id.value;
+                            const create_vocabulary_sets = await ccm.store({
+                                "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
+                            });
+                            await create_vocabulary_sets.set({"key": last_id.value+"", "value": vocabulary_sets_input_value});
+                            await create_vocabulary_sets.set({"key": "last_id_v", "value": 0});
 
-                        var option = document.createElement("option");
-                        option.value = vocabulary_sets_input_value;
-                        option.innerText = vocabulary_sets_input_value;
-                        this.element.querySelector("#select_vocabulary_sets").appendChild(option);
-
-                    }else {
+                            var option = document.createElement("option");
+                            option.value = vocabulary_sets_input_value;
+                            option.innerText = vocabulary_sets_input_value;
+                            this.element.querySelector("#select_vocabulary_sets").appendChild(option);
+                        }
+                    } else {
                         alert("Bitte eine Beschreibung des Vokabelsets eingeben");
                     }
                     this.element.querySelector('#new_vocabulary_sets_input_id').value = ""

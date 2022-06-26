@@ -139,32 +139,44 @@
             };
 
             const nextCardVocabulary = async () => {
-                const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + 0;
-                const create_vocabulary_sets = await ccm.store({
-                    "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
+
+                const vocabulary_sets_id = await ccm.store({
+                    "url": 'https://ccm2.inf.h-brs.de', "name": "nniazm2s_vocabulary_sets_id"
                 });
-                var stack_data_1 = []
-                for (let i = 0; i < 2; i++) {
-                    var obj = await create_vocabulary_sets.get("V_" + i)
-                    stack_data_1.push(obj)
+                var last_id = await vocabulary_sets_id.get("last_id");
+
+                for (let i = 0; i <= last_id.value; i++) {
+                    const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + i;
+                    const create_vocabulary_sets = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
+                    });
+                    var topic = await create_vocabulary_sets.get(i+'')
+                    var selected_topic = this.parent.element.querySelector('#select_vocabulary_sets').value
+                    if(topic !== null  && topic.value === selected_topic){
+                        var stack_data = []
+                        for (let i = 0; i < 2; i++) {
+                            var vocabulary_object = await create_vocabulary_sets.get("V_" + i)
+                            stack_data.push(vocabulary_object)
+                        }
+                        var index = this.element.index;
+                        if (index >= stack_data.length - 1) {
+                            this.element.index = 0;
+                        } else {
+                            this.element.index = this.element.index + 1;
+                        }
+                        const instance = await this.blank_flashcard.start({
+                            flashcardObject: stack_data[index].value,
+                        });
+                        blank_flashcard_instance = instance
+                        current_card = stack_data[index].value;
+                        this.element.querySelector(
+                            "#start_training_stack"
+                        ).innerHTML = ``;
+                        this.element
+                            .querySelector("#start_training_stack")
+                            .appendChild(instance.root);
+                    }
                 }
-                var index = this.element.index;
-                if (index >= stack_data_1.length - 1) {
-                    this.element.index = 0;
-                } else {
-                    this.element.index = this.element.index + 1;
-                }
-                const instance = await this.blank_flashcard.start({
-                    flashcardObject: stack_data_1[index].value,
-                });
-                blank_flashcard_instance = instance
-                current_card = stack_data_1[index].value;
-                this.element.querySelector(
-                    "#start_training_stack"
-                ).innerHTML = ``;
-                this.element
-                    .querySelector("#start_training_stack")
-                    .appendChild(instance.root);
             };
             this.start = async () => {
                 render();
