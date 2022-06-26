@@ -154,7 +154,7 @@
                     var selected_topic = this.parent.element.querySelector('#select_vocabulary_sets').value
                     if(topic !== null  && topic.value === selected_topic){
                         var stack_data = []
-                        for (let i = 0; i < 2; i++) {
+                        for (let i = 0; i < last_id.value; i++) {
                             var vocabulary_object = await create_vocabulary_sets.get("V_" + i)
                             stack_data.push(vocabulary_object)
                         }
