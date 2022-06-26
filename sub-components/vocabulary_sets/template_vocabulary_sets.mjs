@@ -26,7 +26,7 @@ export function header_main(app, events) {
             </div>
             <br>
             <div id="content">
-                <label>Vorhandene Vokabelset:</label>
+                <label>Vorhandene Vokabelset auswählen:</label>
                 <select id="select_vocabulary_sets"></select>
                 <button class="glow-on-hover" @click=${events.create_vocabulary_button}
                         data-lang="create_vocabulary_button">${app.text.create_vocabulary_button}
