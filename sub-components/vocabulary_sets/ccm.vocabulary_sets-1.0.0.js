@@ -150,7 +150,6 @@
                 var v_id = await vocabulary_sets.get('last_id_v')
                 for (let i = 0; i <= v_id.value; i++) {
                     var flashcardObj = await vocabulary_sets.get('V_' + i)
-                    console.log("flashcardObj", flashcardObj)
                     if(flashcardObj !== null){
                         const instance = await this.flashcard.start({
                             flashcardObject: flashcardObj.value,
@@ -177,7 +176,6 @@
                     });
                     var option = document.createElement("option");
                     var topic = await create_vocabulary_sets.get(i+'')
-                    console.log("topic",topic)
                     option.value = topic.value
                     option.innerText = topic.value;
                     this.element.querySelector("#select_vocabulary_sets").appendChild(option);
