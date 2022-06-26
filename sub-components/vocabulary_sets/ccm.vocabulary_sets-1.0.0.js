@@ -18,23 +18,23 @@
                 [  // serial
                     "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
                     "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-dark.min.css",
-                    // "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/style.css",
-                    "./style.css",
+                    "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/style.css",
+                    //"./style.css",
                 ],
                 "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
                 { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
             ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
-            // "html": ["ccm.load","https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/template_vocabulary_sets.mjs"],
-            "html": ["ccm.load","./template_vocabulary_sets.mjs"],
-            // "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
-            //     "translations": {
-            //         // "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
-            //         // "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#en"],
-            //     }
-            // }],
-            // "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
-            "text": ["ccm.load", "./resources.mjs#de"],
+            "html": ["ccm.load","https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/template_vocabulary_sets.mjs"],
+            //"html": ["ccm.load","./template_vocabulary_sets.mjs"],
+            "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
+                "translations": {
+                    "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
+                    "en": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#en"],
+                }
+            }],
+            "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
+            //"text": ["ccm.load", "./resources.mjs#de"],
             "flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/ccm.flashcard-1.0.0.js"],
             "create_flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js"],
             "play_trainingstack": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js"],
