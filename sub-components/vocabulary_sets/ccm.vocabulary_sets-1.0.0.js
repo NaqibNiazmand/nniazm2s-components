@@ -99,6 +99,7 @@
                             option.value = vocabulary_sets_input_value;
                             option.innerText = vocabulary_sets_input_value;
                             this.element.querySelector("#select_vocabulary_sets").appendChild(option);
+                            alert("Vokabelset wurde erfolgreich angelegt.")
                         }
                     } else {
                         alert("Bitte eine Beschreibung des Vokabelsets eingeben");
