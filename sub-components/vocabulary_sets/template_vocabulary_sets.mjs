@@ -18,7 +18,7 @@ export function header_main(app, events) {
         </header>
         <main>
             <div id="new_vocabulary_sets">
-                <label>vocabulary_sets anlegen</label>
+                <label>Vokabelset anlegen</label>
                 <input type="text" name="new_vocabulary_sets_input_name" id="new_vocabulary_sets_input_id"/>
                 <button class="glow-on-hover" @click=${events.create_vocabulary_sets_button}
                         data-lang="vocabulary_sets_save_button">${app.text.vocabulary_sets_save_button}
@@ -26,7 +26,7 @@ export function header_main(app, events) {
             </div>
             <br>
             <div id="content">
-                <label>Vorhandene vocabulary_sets</label>
+                <label>Vorhandene Vokabelset:</label>
                 <select id="select_vocabulary_sets"></select>
                 <button class="glow-on-hover" @click=${events.create_vocabulary_button}
                         data-lang="create_vocabulary_button">${app.text.create_vocabulary_button}
