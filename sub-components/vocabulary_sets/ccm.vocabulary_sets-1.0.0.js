@@ -26,7 +26,7 @@
             ],
             "helper": ["ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs"],
             "html": ["ccm.load","https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/template_vocabulary_sets.mjs"],
-            //"html": ["ccm.load","./template_vocabulary_sets.mjs"],
+            // "html": ["ccm.load","./template_vocabulary_sets.mjs"],
             "lang": ["ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.js", {
                 "translations": {
                     "de": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
@@ -34,7 +34,7 @@
                 }
             }],
             "text": ["ccm.load", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/vocabulary_sets/resources.mjs#de"],
-            //"text": ["ccm.load", "./resources.mjs#de"],
+            // "text": ["ccm.load", "./resources.mjs#de"],
             "flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/flashcard/ccm.flashcard-1.0.0.js"],
             "create_flashcard": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/create_flashcards/ccm.create_flashcards-1.0.0.js"],
             "play_trainingstack": ["ccm.component", "https://naqibniazmand.github.io/nniazm2s-components/sub-components/trainingstack/ccm.play_trainingstack-1.0.0.js"],
@@ -129,6 +129,27 @@
                         "is_vocabulary_sets": true,
                     })
                 },
+                /**
+                 * show vocabulary set button control
+                 * @type {Function}
+                 */
+                vocabulary_sets_show_button: async () => {
+                    const vocabulary_sets_id = await ccm.store({
+                        "url": 'https://ccm2.inf.h-brs.de', "name": "nniazm2s_vocabulary_sets_id"
+                    });
+                    var last_id = await vocabulary_sets_id.get("last_id");
+                    for (let i = 0; i <= last_id.value; i++) {
+                        const vocabulary_sets_name = "nniazm2s_create_vocabulary_sets_" + i;
+                        const create_vocabulary_sets = await ccm.store({
+                            "url": 'https://ccm2.inf.h-brs.de', "name": vocabulary_sets_name
+                        });
+                        var topic = await create_vocabulary_sets.get(i+'')
+                        var selected_topic = this.element.querySelector('#select_vocabulary_sets').value
+                        if(topic !== null  && topic.value === selected_topic){
+                            update_view_show_vocabulary_sets(create_vocabulary_sets)
+                        }
+                    }
+                }
             };
             /**
              * render content

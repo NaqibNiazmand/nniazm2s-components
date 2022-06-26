@@ -33,6 +33,8 @@ export function header_main(app, events) {
                 </button>
                 <button class="glow-on-hover" @click=${events.learn_vocabulary_button}
                         data-lang="learn_vocabulary_button">${app.text.learn_vocabulary_button}</button>
+                <button class="glow-on-hover" @click=${events.vocabulary_sets_show_button}
+                        data-lang="vocabulary_sets_show_button">${app.text.vocabulary_sets_show_button}</button>
             </div>
             <div id="show_vocabulary_sets"></div>
             <div id="create_vocabulary_id"></div>

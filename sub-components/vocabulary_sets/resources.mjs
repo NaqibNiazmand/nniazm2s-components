@@ -13,6 +13,7 @@ export const de = {
     "vocabulary_sets_save_button" : "Speichern",
     "create_vocabulary_button" : "Vokabel hinzufügen",
     "learn_vocabulary_button" : "Vokabelset lernen",
+    "vocabulary_sets_show_button" : "Vokabelset anzeigen",
 };
 
 /**
@@ -24,4 +25,5 @@ export const en = {
     "vocabulary_sets_save_button" : "Save",
     "create_vocabulary_button" : "Add vocabulary",
     "learn_vocabulary_button" : "Learn vocabulary set",
+    "vocabulary_sets_show_button" : "Show vocabulary set",
 };
