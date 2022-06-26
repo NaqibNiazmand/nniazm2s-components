@@ -102,7 +102,7 @@
                                     create_vocabulary_sets.set({"key": 'V_' + v_id.value, "value": flashcardObject});
                                     var update_v_id = v_id.value + 1
                                     await create_vocabulary_sets.set({"key": "last_id_v", "value": update_v_id});
-
+                                    console.log("Vocabulary was added: ",flashcardObject)
                                 }
                             }
                             events.cancel_button()
